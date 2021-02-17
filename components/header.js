@@ -5,19 +5,19 @@ export default function Header() {
 
             <ul className="nav">
                 <li className="nav__item">
-                <a href="/" className="nav__link">
-                    <span>Home</span>
-                </a>
+                    <a href="/" className="nav__link">
+                        <span>Home</span>
+                    </a>
                 </li>
                 <li className="nav__item">
-                <a href="/" className="nav__link">
-                    <span>Quiz</span>
-                </a>
+                    <a href="/" className="nav__link">
+                        <span>Quiz</span>
+                    </a>
                 </li>
                 <li className="nav__item">
-                <a href="/" className="nav__link">
-                    <span>Admin</span>
-                </a>
+                    <a href="/" className="nav__link">
+                        <span>Admin</span>
+                    </a>
                 </li>
             </ul>
         </header>
