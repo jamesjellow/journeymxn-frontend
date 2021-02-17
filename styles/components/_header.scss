@@ -1,0 +1,46 @@
+// This is styling code for the header of a page (navigation bar)
+
+.small-logo {
+    height: 7rem;
+    margin: 0 5rem 0 1rem;
+}
+
+.nav-bar {
+    font-size: 1.6rem;
+    height: 7rem;
+
+    background-color: $color-primary;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav {
+    list-style-type: none;
+
+    flex: 1;
+    display: flex;
+    align-self: stretch;
+
+    justify-content: space-around;
+    align-items: center;
+
+    &__item {
+        text-decoration: none;
+        cursor: pointer;
+        height: 100%;
+
+        align-self: stretch;
+        text-align: center;
+
+        &:hover {
+            background-color: rgba($color-primary-dark, .5);
+        }
+    }
+
+    &__link {
+
+    }
+}
+
