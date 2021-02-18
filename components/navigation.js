@@ -10,12 +10,12 @@ export default function Header() {
                     </a>
                 </li>
                 <li className="nav__item">
-                    <a href="/" className="nav__link">
+                    <a href="/quiz" className="nav__link">
                         <span>Quiz</span>
                     </a>
                 </li>
                 <li className="nav__item">
-                    <a href="/" className="nav__link">
+                    <a href="/admin" className="nav__link">
                         <span>Admin</span>
                     </a>
                 </li>

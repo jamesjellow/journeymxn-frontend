@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 
-const HeaderComponent = dynamic(() => import('../components/header'))
+const NavComponent = dynamic(() => import('../components/navigation'))
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <HeaderComponent />
+      <NavComponent />
       
     </div>
   )
