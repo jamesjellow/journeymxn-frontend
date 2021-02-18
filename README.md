@@ -35,8 +35,8 @@ Use the BEM naming convention
 
 more details at:
 
--https://en.bem.info/methodology/naming-convention/
--https://www.freecodecamp.org/news/css-naming-conventions-that-will-save-you-hours-of-debugging-35cea737d849/
+- https://en.bem.info/methodology/naming-convention/
+- https://www.freecodecamp.org/news/css-naming-conventions-that-will-save-you-hours-of-debugging-35cea737d849/
 
 ## Learn More
 
