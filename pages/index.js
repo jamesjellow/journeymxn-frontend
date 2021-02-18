@@ -13,6 +13,16 @@ export default function Home() {
 
       <NavComponent />
       
+      <header className="home-header">
+        <div class="home-header__heading-container">
+            <h1 class="heading-primary">
+                <span class="heading-primary--main">Journeymxn</span>
+                <span class="heading-primary--sub">Colleges. Careers. Futures.</span>
+            </h1>
+
+            <a href="#section-tours" class="btn btn--white btn--animated">Discover our tours</a>
+        </div>
+      </header>
     </div>
   )
 }

@@ -10,6 +10,7 @@
     height: 7rem;
 
     background-color: $color-primary;
+    border-bottom: 2px solid rgba($color-primary-dark, 0.9);
 
     display: flex;
     justify-content: space-between;
@@ -38,16 +39,36 @@
         justify-content: center;
         align-items: center;
 
-        &:hover {
-            background-color: rgba($color-primary-dark, .5);
+        background-image: linear-gradient($color-primary-dark, $color-primary-dark);
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: 0% 100%;
+        transition: all 0.3s ease-in-out;
+        backface-visibility: hidden;
 
-            & > a > span::before {
-                visibility: visible;
-                width: 100%;
+        &:hover {
+            background-size: 100% 100%;
+
+            & > a > span {
+                &::before {
+                    visibility: visible;
+                    width: 100%;
+                }
             }
         }
+    }
 
-        & > a > span::before {
+    &__link {
+        align-self: center;
+        margin-bottom: 1rem;
+        text-decoration: none;
+        position: relative;
+        color: $color-grey-light-1;
+
+        font-size: 2rem;
+        letter-spacing: 3px;
+
+        & > span::before {
             content: "";
             position: absolute;
             width: 0px;
@@ -58,19 +79,6 @@
             visibility: hidden;
             transition: all 0.3s ease-in-out;
         }
-
-
-    }
-
-    &__link {
-        align-self: center;
-        margin-bottom: 1rem;
-        text-decoration: none;
-        position: relative;
-        color: $color-grey-light-1;
-
-        font-size: 1.8rem;
-        letter-spacing: 2px;
     }
 }
 
