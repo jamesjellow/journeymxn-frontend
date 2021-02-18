@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 
 const NavComponent = dynamic(() => import('../components/navigation'))
 
@@ -14,13 +15,16 @@ export default function Home() {
       <NavComponent />
       
       <header className="home-header">
-        <div class="home-header__heading-container">
-            <h1 class="heading-primary">
-                <span class="heading-primary--main">Journeymxn</span>
-                <span class="heading-primary--sub">Colleges. Careers. Futures.</span>
+        <div className="home-header__heading-container">
+            <h1 className="heading-primary">
+                <span className="heading-primary--main u-margin-bottom-small">Journeymxn</span>
+                <span className="heading-primary--sub">Discover Your</span>
+                <span className="heading-primary--sub">Colleges. Careers. Futures.</span>
             </h1>
 
-            <a href="#section-tours" class="btn btn--white btn--animated">Discover our tours</a>
+            <Link href="/quiz">
+              <a href="#!" className="btn btn--white btn--animated">Take Our Career Quiz</a>
+            </Link>
         </div>
       </header>
     </div>

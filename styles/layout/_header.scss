@@ -1,9 +1,9 @@
 .home-header {
-    height: 95vh;
+    height: 90vh;
 
     background-image: linear-gradient(to right bottom, 
-                      rgba($color-primary-light, 0.6), 
-                      rgba($color-primary-dark, 0.6)), 
+                      rgba($color-primary-light, 0.7), 
+                      rgba($color-primary-dark, 0.7)), 
                       url(../../public/header_background2.jpg);
 
     background-size: cover;
@@ -18,7 +18,14 @@
     &__heading-container {
         display: flex;
         flex-direction: column;
-        justify-self: center;
+        justify-content: space-evenly;
         align-content: center;
+        
+        text-align: center;
+
+        & > .btn {
+            align-self: center;
+            width: 40%;
+        }
     }
 }
