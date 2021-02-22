@@ -13,14 +13,14 @@ export default function Navigation() {
                         </a>
                     </li>
                 </Link>
-                <Link href="/">
+                <Link href="/quiz">
                     <li className="nav__item">
                         <a href="#!" className="nav__link">
                             <span>Quiz</span>
                         </a>
                     </li>
                 </Link>
-                <Link href="/">
+                <Link href="/admin">
                     <li className="nav__item">
                         <a href="#!" className="nav__link">
                             <span>Admin</span>
