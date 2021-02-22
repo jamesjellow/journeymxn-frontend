@@ -15,7 +15,7 @@ export default function Quiz() {
       <NavComponent />
       
       <div>
-        <h2>quiz</h2>
+        <h2>Admin</h2>
       </div>
     </div>
   )
