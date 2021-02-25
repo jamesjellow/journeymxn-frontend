@@ -1,9 +1,11 @@
 .about-container{
     background-color: antiquewhite;
     display: flex;
+    justify-content: space-around;
     flex-wrap: wrap;
     overflow: auto;
 }
+
 .about-container__journey{
     background-color: white
 }
@@ -19,6 +21,34 @@
     text-align: center;
     padding-block: 3rem ;
     margin-inline: 5rem;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.sponsor{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+.team-developers{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+.person-photo{
+    border-radius: 50%;
+    width: 35%;
+    min-width: 200px;
+}
+
+.person-text{
+    max-width: 50%;
     font-size: 2rem;
     font-weight: 500;
 }
