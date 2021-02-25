@@ -28,13 +28,10 @@ export default function About() {
                     Meet the team
                 </h2>
                 <div className="sponsor">
-                    <img src="./public/Hai.jpg"/>
+                    <img src="./public/icon-256.jpg"/>
                 </div>
-                <ul classname="team-developers">
+                <ul className="team-developers">
                     <div className="personOne">
-                        <image href="">
-
-                        </image>
                     </div>
                 </ul>
             </section>
