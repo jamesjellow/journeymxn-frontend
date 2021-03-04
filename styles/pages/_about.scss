@@ -24,7 +24,7 @@
 
     animation-name: moveInLeft;
     animation-duration: 1s;
-    animation-timing-function: ease-out;
+    animation-timing-function: ease-out
 }
 
 .title-text-team{
@@ -133,6 +133,7 @@
     "title-left title-right"
     "text-left text-right";
     grid-column-gap: 5rem;
+    padding-bottom: 5rem;
 }
 
 .team-card__image-left{
