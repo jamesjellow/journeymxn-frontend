@@ -1,0 +1,63 @@
+.about-container {
+    background-color: aquamarine;
+
+    &__journey {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.about-title{
+    margin: 5rem;
+    align-content: space-around;
+    font-size: 4rem;
+    font-weight: 250;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 3.5rem;
+}
+
+.journey-info{
+    margin: 3rem;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.about-flex{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.person-photo{
+    border-radius: 50%;
+    max-width: 20%;
+    min-width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.person-text{
+    display: block;
+    max-width: 50%;
+    min-width: 200px;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.person-title{
+    align-content: space-around;
+    font-size: 3rem;
+    font-weight: 250;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+}
+
+.person-profile{
+    max-width: 20%;
+    min-width: 250px;
+}
