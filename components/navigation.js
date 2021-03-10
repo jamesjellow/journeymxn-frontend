@@ -27,6 +27,13 @@ export default function Navigation() {
                         </a>
                     </li>
                 </Link>
+                <Link href="/about">
+                    <li className="nav__item">
+                        <a href="#!" className="nav__link">
+                            <span>About Us</span>
+                        </a>
+                    </li>
+                </Link>
             </ul>
         </nav>
     )
