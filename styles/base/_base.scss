@@ -11,7 +11,20 @@
 
 html {
     box-sizing: border-box;
+    
     font-size: 62.5%; // this makes 1rem = 10px for easier calculation
+
+    @include respond(tab-land) { // width < 1200?
+        font-size: 56.25%; //1 rem = 9px, 9/16 = 50%
+    }
+
+    @include respond(tab-port) { // width < 900?
+        font-size: 50%; //1 rem = 8px, 8/16 = 50%
+    }
+    
+    @include respond(big-desktop) {
+        font-size: 75%; //1rem = 12, 12/16
+    }
 }
 
 body {
@@ -21,6 +34,7 @@ body {
     color: $color-grey-dark-2;
     background-size: cover;
     background-repeat: no-repeat;
+    box-sizing: border-box;
 
     min-height: 100vh;
     width: 100%;
