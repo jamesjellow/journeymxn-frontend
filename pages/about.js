@@ -62,6 +62,7 @@ export default function About() {
           </div>
         </section>
       
+      
       </article>
 
     </div>
