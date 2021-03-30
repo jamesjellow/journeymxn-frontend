@@ -1,63 +1,280 @@
-.about-container {
-    background-color: aquamarine;
-
-    &__journey {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+.about-container{
+    background-image: linear-gradient(to bottom right, $color-primary-light, #013220);
+    color: white;
 }
 
-.about-title{
-    margin: 5rem;
-    align-content: space-around;
-    font-size: 4rem;
-    font-weight: 250;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 3.5rem;
-}
-
-.journey-info{
-    margin: 3rem;
-    text-align: center;
-    font-size: 2rem;
-    font-weight: 500;
-}
-
-.about-flex{
+.about__title-container{
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
+    padding: 5rem;
 }
 
-.person-photo{
-    border-radius: 50%;
-    max-width: 20%;
-    min-width: 250px;
-    margin-left: auto;
-    margin-right: auto;
+.title-pair{
+    padding: 20rem
 }
 
-.person-text{
-    display: block;
-    max-width: 50%;
-    min-width: 200px;
-    font-size: 2rem;
-    font-weight: 500;
-}
+.title-text{
 
-.person-title{
-    align-content: space-around;
+    text-align: center;
     font-size: 3rem;
-    font-weight: 250;
+    font-weight: 100;
     text-transform: uppercase;
-    margin-bottom: 1.5rem;
+    letter-spacing: 1rem;
+    padding-bottom: 5rem;
+
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out
 }
 
-.person-profile{
-    max-width: 20%;
+.title-text-team{
+
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 100;
+    text-transform: uppercase;
+    letter-spacing: 1rem;
+    padding-block: 20rem;
+}
+
+.title-info{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: .1fr fr;
+    grid-template-areas: 
+    "goal-title vision-title"
+    "goal vision";
+    animation: moveInRight 1s ease-out;
+    grid-column-gap: 5rem;
+}
+
+.goal-title{
+    text-align: left;
+    font-size: 3rem;
+    font-weight: 100;
+    text-transform: uppercase;
+    letter-spacing: 1rem;
+    grid-area: goal-title;
+}
+
+.title-goal-text{
+     text-indent: 3rem;
+     font-size: 2em;
+     grid-area: goal;
+     word-break: normal;
+ }
+
+ 
+.vision-title{
+    text-align: left;
+    font-size: 3rem;
+    font-weight: 100;
+    text-transform: uppercase;
+    letter-spacing: 1rem;
+    grid-area: vision-title;
+    
+}
+
+ .title-vision-text{
+    text-indent: 3em;
+    font-size: 2em;
+    grid-area: vision;
+}
+
+.team-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5rem;
+}
+
+.sponsor-card{
+    display: grid;
+    grid-template-columns: 1fr 2fr ;
+    grid-template-rows: .5fr 2fr;
+    grid-template-areas:
+    "title-pic about-title"
+    "title-pic text";
+    padding: 10rem;
+}
+
+.sponsor-card__image{
+    max-width: 100%; height: auto;
+    grid-area: title-pic;
+    justify-self: center;
+    padding-right: 5rem;
+
+}
+
+.sponsor-image{
+    border-radius: 50%;
     min-width: 250px;
+}
+
+.sponsor-card__title{
+    font-size: 3rem;
+     font-weight: 100;
+     text-transform: uppercase;
+     letter-spacing: 1rem;
+     align-self: flex-end;
+}
+
+.sponsor-card__text{
+    grid-area: text;
+    font-size: 2rem;
+    text-indent: 5rem;
+}
+
+.team-card{
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    grid-template-rows:1fr .2fr .3fr;
+    grid-template-areas:
+    "title-pic-left title-pic-right"
+    "title-left title-right"
+    "text-left text-right";
+    grid-column-gap: 5rem;
+    padding-bottom: 5rem;
+}
+
+.team-card__image-left{
+    max-width: 100%; height: auto;
+    grid-area: title-pic-left;
+    justify-self: center;
+}
+
+.team-image-left{
+    border-radius: 50%;
+    max-width: 350px;
+}
+
+.team-card__title-left{
+    font-size: 2rem;
+    font-weight: 100;
+    text-transform: uppercase;
+    letter-spacing: 1rem;
+    text-align: center;
+    grid-area: title-left;
+    padding: 2rem;
+}
+
+.team-card__text-left{
+    grid-area: text-left;
+    font-size: 2rem;
+    text-indent: 5rem;
+}
+
+.team-card__image-right{
+    max-width: 100%; height: auto;
+    grid-area: title-pic-right;
+    justify-self: center;
+}
+
+.team-image-right{
+    border-radius: 50%;
+    max-width: 350px;
+}
+
+.team-card__title-right{
+    font-size: 2rem;
+    font-weight: 100;
+    text-transform: uppercase;
+    letter-spacing: 1rem;
+    text-align: center;
+    grid-area: title-right;
+    padding: 2rem;
+}
+
+.team-card__text-right{
+    grid-area: text-right;
+    font-size: 2rem;
+    text-indent: 5rem;
+}
+
+@media only screen and (max-width:1200px){
+    .sponsor-card{
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: 1fr .25fr;
+        grid-template-areas:
+        "title-pic about-title"
+        "text text";
+        grid-row-gap: 3rem;
+    }
+
+    .sponsor-card__title{
+         align-self: center;
+    }
+
+    .team-card{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr .25fr .3fr 1fr .25fr .3fr;
+        grid-template-areas:
+        "title-pic-left" 
+        "title-left"
+        "text-left" 
+        "title-pic-right" 
+        "title-right"
+        "text-right";
+    }
+
+    .title-info{
+        display: grid;
+        grid-template-columns: 1fr ;
+        grid-template-rows: .2fr 1fr .2fr 1fr;
+        grid-template-areas: 
+        "goal-title" "goal" "vision-title" "vision";
+        animation: moveInRight 1s ease-out;
+        grid-row-gap: 5rem;
+    }
+    
+}
+
+@media only screen and (max-width:725px){
+    .sponsor-card{
+        display: grid;
+        grid-template-columns: .8fr;
+        grid-template-rows: 1fr .25fr 2fr;
+        grid-template-areas:
+        "title-pic"
+        "about-title"
+        "text";
+        justify-content: center;
+        padding: none;
+    }
+
+    .sponsor-image{
+        border-radius: 50%;
+        max-width: 300px;
+    }
+    
+    .sponsor-card__title{
+        font-size: 3rem;
+         font-weight: 100;
+         text-transform: uppercase;
+         letter-spacing: 1rem;
+         align-self: flex-end;
+    }
+    
+    .sponsor-card__text{
+        grid-area: text;
+        font-size: 2rem;
+        text-indent: 5rem;
+    }
+
+    .title-info{
+        display: grid;
+        grid-template-columns: 1fr ;
+        grid-template-rows: .2fr 1fr .2fr 1fr;
+        grid-template-areas: 
+        "goal-title" "goal" "vision-title" "vision";
+        animation: moveInRight 1s ease-out;
+        grid-row-gap: 5rem;
+    }
+
+    .title-text{
+    
+    }
 }
