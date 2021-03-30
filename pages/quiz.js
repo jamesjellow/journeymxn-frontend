@@ -9,14 +9,18 @@ export default function Quiz() {
     <div className="container">
       <Head>
         <title>Journeymxn</title>
+        <meta name="viewport" content="width=device-width, initial-scale=0.41, maximum-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <NavComponent />
       
-      <div>
-        <h2>quiz</h2>
+      <div className="quiz">
+        <div className="quiz__container">
+          
+        </div>
       </div>
+      
     </div>
   )
 }
