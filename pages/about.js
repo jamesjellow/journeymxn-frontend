@@ -2,6 +2,8 @@ import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
+import '../styles/pages/about.module.scss'
+
 const NavComponent = dynamic(() => import('../components/navigation'))
 
 export default function About() {

@@ -1,0 +1,9 @@
+@import "../abstracts/functions";
+@import "../abstracts/mixins";
+@import "../abstracts/variables";
+
+.quiz {
+	&__container {
+		background-color: aquamarine;
+	}
+}
