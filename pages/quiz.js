@@ -2,7 +2,7 @@ import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
-import '../styles/pages/quiz.module.scss'
+import styles from '../styles/pages/quiz.module.scss'
 
 const NavComponent = dynamic(() => import('../components/navigation'))
 
@@ -17,8 +17,8 @@ export default function Quiz() {
 
       <NavComponent />
       
-      <div className="quiz">
-        <div className="quiz__container">
+      <div className="">
+        <div className="container">
           Quiz
         </div>
       </div>
