@@ -2,6 +2,8 @@ import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
+import QuizForm from '../components/quiz_form'
+
 import styles from '../styles/pages/quiz.module.scss'
 
 const NavComponent = dynamic(() => import('../components/navigation'))
@@ -19,9 +21,7 @@ export default function Quiz() {
       
 
       <div className={styles["container"]}>
-        <div className={styles["card"]}>
-          
-        </div>
+        <QuizForm  />
 
         <a className={styles["img-credit"]} href="http://www.freepik.com">Background image designed by Freepik</a>
       </div>

@@ -5,6 +5,34 @@
 .card {
 	width: 100%;
 	min-height: 100%;
+	padding: 2rem;
 
-	background-color: $;
+	background-color: $color-grey-light-1;
+	border-radius: 2.4rem;
+
+	box-shadow: .5rem .5rem .1rem $color-grey-light-2;
+}
+
+.quiz {
+	
+}
+
+.question {
+	font-size: 2.0rem;
+	font-weight: 600;
+	letter-spacing: .2rem;
+	text-align: center;
+}
+
+.choice {
+	&__group {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&__item {
+		font-size: 1.6rem;
+	}
 }
