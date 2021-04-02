@@ -3,6 +3,7 @@
 @import "../abstracts/variables";
 
 @import "../base/typography";
+@import "../base/animations";
 
 @import "../layout/header";
 
@@ -13,15 +14,18 @@
     background: linear-gradient(135deg, rgba(120,168,72,1) 0%, rgb(47, 85, 12) 80%);
     color: white;
 }
+
 .about__title-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .title-pair {
     text-align: center;
     padding: 10rem 0;
 }
+
 .title-text {
     text-align: center;
     font-size: 3rem;
@@ -29,9 +33,11 @@
     text-transform: uppercase;
     letter-spacing: 1rem;
 }
+
 .title-info {
     max-width: 90%;
 }
+
 .goal-title {
     text-align: left;
     font-size: 3rem;
@@ -40,18 +46,22 @@
     letter-spacing: 1rem;
     color: #ceff9d;
 }
+
 .title-goal-text {
     font-size: 2rem;
     padding-bottom: 3rem;
 }
-#team-container {
+
+.team-container {
     padding: 0 5%;
     align-items: center;
 }
+
 .team-title {
     text-align: center;
     padding: 10rem 0;
 }
+
 .sponsor-card{
     display: flex;
     flex-direction: column;

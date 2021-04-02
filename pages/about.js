@@ -31,7 +31,7 @@ export default function About() {
 
         <section className={styles["team-container"]}>
           <div className={styles["team-title-container"]}>
-            <h1 className={styles["goal-title team-title"]}>Meet the team</h1>
+            <h1 className={`${styles["goal-title"]} ${styles["team-title"]}`}>Meet the team</h1>
           </div>
           <div className={styles["sponsor-card"]}>
             <div className={styles["sponsor-image"]}>
@@ -60,7 +60,7 @@ export default function About() {
           <div className={`${styles["team-card"]} ${styles["card-right"]}`}>
             <img className={`${styles["team-card__image"]} ${styles["image-left"]}`} src="/patrick.jpg" alt="Photo of Patrick"/>
             <h2 className={`${styles["team-card__title"]} ${styles["title-left"]}`}>Front-End Developer: Patrick Castillofuentes</h2>
-            <p className={`${styles["team-card__info"]} ${styles["info-left"]}`}>Patrick is a 5th Year Computer Science Major. He specializes in network security and cryptography. In addition, Patrick is also has a background in graphic desi</p>
+            <p className={`${styles["team-card__info"]} ${styles["info-left"]}`}>Patrick is a 5th Year Computer Science Major. He specializes in network security and cryptography. In addition, Patrick is also has a background in graphic design</p>
           </div>
         </section>
       
