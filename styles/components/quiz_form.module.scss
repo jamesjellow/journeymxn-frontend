@@ -1,0 +1,10 @@
+@import "../abstracts/functions";
+@import "../abstracts/mixins";
+@import "../abstracts/variables";
+
+.card {
+	width: 100%;
+	min-height: 100%;
+
+	background-color: $;
+}

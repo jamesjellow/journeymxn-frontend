@@ -17,10 +17,13 @@ export default function Quiz() {
 
       <NavComponent />
       
-      <div className="">
-        <div className="container">
-          Quiz
+
+      <div className={styles["container"]}>
+        <div className={styles["card"]}>
+          
         </div>
+
+        <a className={styles["img-credit"]} href="http://www.freepik.com">Background image designed by Freepik</a>
       </div>
       
     </div>

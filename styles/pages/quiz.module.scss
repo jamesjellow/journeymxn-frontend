@@ -7,3 +7,24 @@
 		background-color: aquamarine;
 	}
 }
+
+.container {
+	background-image: url(../../public/quiz_background.jpg);
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    position: relative;
+
+	height: 90vh;
+
+	padding: 2rem;
+}
+
+.img-credit {
+	position: absolute;
+	bottom: .2rem;
+	right: .2rem;
+
+	text-decoration: none;
+	font-size: 1rem;
+}
