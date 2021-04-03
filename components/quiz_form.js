@@ -4,11 +4,11 @@ import styles from '../styles/components/quiz_form.module.scss'
 
 
 function makeAnswerChoicesHTML(answers, question_num) {
-	return answers.map((answer) => {
+	return answers.map((answer, index) => {
 		return (
 			<div class={styles["choice__radio-group"]}>
-				<input type="radio" name={`choice${question_num + 1}`} className={styles["choice__radio-btn"]} />
-				<label className={styles["choice__label"]}>{answer}</label>
+				<input type="radio" id={`q${question_num + 1}a${index + 1}`} name={`choice${question_num + 1}`} className={styles["choice__radio-btn"]} />
+				<label for={`q${question_num + 1}a${index + 1}`} className={styles["choice__label"]}>{answer}</label>
 			</div>
 		)
 	})
