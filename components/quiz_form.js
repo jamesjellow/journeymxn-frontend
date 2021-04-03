@@ -6,8 +6,8 @@ import styles from '../styles/components/quiz_form.module.scss'
 function makeAnswerChoicesHTML(answers, question_num) {
 	return answers.map((answer) => {
 		return (
-			<div class="choice__radio-group">
-				<input type="radio" name={`choice${question_num + 1}`} className={styles["choice__btn"]} />
+			<div class={styles["choice__radio-group"]}>
+				<input type="radio" name={`choice${question_num + 1}`} className={styles["choice__radio-btn"]} />
 				<label className={styles["choice__label"]}>{answer}</label>
 			</div>
 		)
@@ -32,6 +32,8 @@ export default function QuizForm({
 					</div>
 				);
 			})}
+
+			<button className={styles["quiz__submit-btn"]}>Submit</button>
 		</div>
 	);
 }
