@@ -21,7 +21,7 @@ export default function QuizForm({
 				  "answers": ["answer1", "answer2", "answer3"]}]
 }) {
 	return (
-		<div className={styles["card"]}>
+		<form action="POST" className={styles["form"]}>
 			{questions.map((each, index) => {
 				return  (
 					<div className="quiz">
@@ -33,7 +33,8 @@ export default function QuizForm({
 				);
 			})}
 
-			<button className={styles["quiz__submit-btn"]}>Submit</button>
-		</div>
+			<button type="submit" className={styles["quiz__submit-btn"]}>Submit</button>
+		</form>
+		
 	);
 }
