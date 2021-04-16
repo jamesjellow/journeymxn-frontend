@@ -12,17 +12,17 @@ export default function Login() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
     
-        <div className={styles["card"]}>
+        <form action="POST" className={styles["card"]}>
             <h1 className={styles["title"]}>Login</h1>
 
             <label for="uname" className={styles["userLabel"]}>Username</label>
             <input type="text" placeholder="Enter Username" name="uname" required className={styles["userInput"]}/>
             
             <label for="pass" className={styles["passLabel"]}>Password</label>
-            <input type="text" placeholder="Enter Password" name="pass" required className={styles["passInput"]}/>
+            <input type="password" placeholder="Enter Password" name="pass" required className={styles["passInput"]}/>
 
             <button type="submit" className={styles["submit"]}>LOGIN</button>
-        </div>
+        </form>
     </div>
   )
 }
