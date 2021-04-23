@@ -5,74 +5,36 @@
 
 .container {
     display: flex;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'DM Serif Text', serif;
     flex-direction: column;
     width:100vw;
     height: 100vh;
-    background: linear-gradient(135deg, rgba(120,168,72,1) 0%, rgb(47, 85, 12) 80%);
+    background: $primary-yellow;
     justify-content: center;
     align-items: center;
     padding: 10%;
     outline: none;
 }
 
+.logo {
+    display: inline-block;
+}
+
 .card {
     display: grid;
-    background: rgba(255, 255, 255, 0.10);
-    box-shadow: 0px 8px 32px rgba(66, 66, 66, 0.39);
-    border-radius: 20px;
+    background: $primary-black;
+    box-shadow: 0px 4px 10px rgba(66, 66, 66, 0.39);
     padding: 5rem;
     max-width: 50rem;
 }
 
+.userInput::before{
+    background-image: url(../../public/account_circle_black_24dp.svg);
+}
+
 .title {
+    text-align: center;
     color: white;
     font-size: 5rem;
     font-weight: 100;
-}
-
-.userLabel, .passLabel {
-    margin-top: 1rem;
-    align-self: flex-end;
-    font-size: 2rem;
-    color: white;           
-}
-.userInput, .passInput{
-    border: none;
-    border-bottom: solid 1px ;
-    background: none;
-    padding: 1rem 1.5rem;
-    color: white;
-    min-height: 35px;
-    width: 30rem;
-}
-
-.submit {
-    cursor: pointer;
-
-    margin-top: 1rem;
-    padding: .5rem;
-
-    text-align: center;
-    font-size: 2rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    letter-spacing: .5rem;
-    
-    background: white;
-    box-shadow: 0px 8px 32px rgba(66, 66, 66, 0.39);
-    border: none;
-    border-radius: 200px;
-    mix-blend-mode: lighten;
-    max-width: 15rem;
-    
-    transition: all .2s;
-    
-    &:hover {
-        box-shadow: 0 1rem 2rem rgba(#000, .15);
-        transform: translateY(-2px);
-    }
-
-    &:focus {
-        transform: translateY(1px);
-    }
 }
