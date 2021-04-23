@@ -8,16 +8,18 @@
 	}
 }
 
-.container {
+.wrapper {
 	background-image: url(../../public/quiz_background.jpg);
 	background-size: cover;
     background-repeat: no-repeat;
     background-position: bottom;
     position: relative;
 
-	height: 90vh;
+	height: 95vh;
 
-	padding: 6rem 4rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
 }
 
 .img-credit {
