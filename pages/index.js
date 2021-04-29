@@ -46,7 +46,7 @@ export default function Home() {
         </div>
         <div className={styles["main__heading-container"]}>
           <h1 className={styles["main__heading-primary--main"]}>
-            In demand vocational, trade & skill-based careers
+            In Demand Vocational, Trade & Skill-based careers
           </h1>
           <h1 className={styles["main__heading-primary--sub"]}>
             Journeymxn aims to match students interests with an educational program that will lead to lifelong, gainful employment. after your assessment you will be provided results based resources of future resources.
