@@ -35,12 +35,39 @@ export default function Home() {
         <div className={styles["header__img-wrapper"]}>
           <img src="/header_background2.jpg" className={styles["header__img"]} alt="header-img"/>
         </div>
-        
       </header>
 
-      <main className={styles["home-header"]}>
+      <main className={styles["main"]}>
+        <div className={styles["main__img-comp"]}>
+          <img src="/finance.jpg" className={`${styles["main__img"]} ${styles["main__img--1"]}`} />
+          <img src="/engineer.jpg" className={`${styles["main__img"]} ${styles["main__img--2"]}`} />
+          <img src="/research.jpg" className={`${styles["main__img"]} ${styles["main__img--3"]}`} />
 
+        </div>
+        <div className={styles["main__heading-container"]}>
+          <h1 className={styles["main__heading-primary--main"]}>
+            In demand vocational, trade & skill-based careers
+          </h1>
+          <h1 className={styles["main__heading-primary--sub"]}>
+            Journeymxn aims to match students interests with an educational program that will lead to lifelong, gainful employment. after your assessment you will be provided results based resources of future resources.
+          </h1>
+        </div>
       </main>
+
+      <main className={styles["main-2"]}>
+        <div className={styles["main__heading-container"]}>
+          <h1 className={styles["main__heading-primary--main"]}>
+            Personalized Comprehensive Career Paths
+          </h1>
+          <h1 className={styles["main__heading-primary--sub"]}>
+            Gain a fresh perspective on what the roadmap to employability looks like from highschool and/or community college.. Find a new pathway to link learning and earning without requiring a college degree.
+          </h1>
+        </div>
+        <div className={styles["main-2__img-wrapper"]}>
+          <img src="/path.jpg" className={styles["main-2__img"]} alt="path-img"/>
+        </div>
+      </main>
+
     </div>
   )
 }

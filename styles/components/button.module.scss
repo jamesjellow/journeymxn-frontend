@@ -60,7 +60,7 @@
         color: white;
 
         &::after {
-            background-color: $color-primary;
+            background-color: $color-grey-dark-1;
         }
     }
     
@@ -69,7 +69,7 @@
         display: inline-block;
         height: 100%;
         width: 100%;
-        border-radius: 10rem;
+        border-radius: .5rem;
         position: absolute;
         top: 0;
         left: 0;
