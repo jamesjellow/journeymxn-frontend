@@ -4,21 +4,31 @@
 
 // This is styling code for the navigation bar
 
-.small-logo {
-    height: 5rem;
-    margin: 0 3rem;
+.large-logo {
+    height: 4rem;
+
+    &--link,
+    &--link:link,
+    &--link:visited {
+        text-decoration: none;
+        color: inherit;
+        flex-basis: 50%;
+    }
 }
 
 .nav-bar {
     font-size: 1.6rem;
-    height: 7rem;
+    height: 5rem;
+    padding: 0 10rem;
 
-    background-color: $color-primary;
-    border-bottom: 2px solid rgba($color-primary-dark, 0.9);
+    background-color: $primary-yellow;
+    box-shadow: 0 10rem 4rem black;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    z-index: 2;
 }
 
 .nav {
@@ -31,27 +41,44 @@
     justify-content: space-around;
     align-items: center;
 
+    &__icon {
+        width: 2.25rem;
+        height: 2.25rem;
+        fill: $color-grey-dark-1;
+
+        position: relative;
+
+        margin-right: 2rem;
+
+        &::before {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 80%;
+            height: 80%;
+            background-color: white;
+        }
+    }
+
     &__item {
         text-decoration: none;
         cursor: pointer;
         height: 100%;
-        width: 35%;
+        width: auto;
 
         align-self: stretch;
 
+        padding: 0 1rem;
+        margin: 0 2rem;
+
         display: flex;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
 
-        background-image: linear-gradient($color-primary-dark, $color-primary-dark);
-        background-position: 50% 50%;
-        background-repeat: no-repeat;
-        background-size: 0% 100%;
         transition: all 0.3s ease-in-out;
-        backface-visibility: hidden;
 
         &:hover {
-            background-size: 100% 100%;
+            background-color: rgba($color-grey-dark-2, .5);
         }
     }
 
@@ -60,10 +87,11 @@
         margin-bottom: 0.5rem;
         text-decoration: none;
         position: relative;
-        color: $color-grey-light-1;
+        color: $color-grey-dark-1;
 
         font-size: 2rem;
-        letter-spacing: 3px;
+        font-weight: 500;
+        letter-spacing: 1px;
     }
 }
 
