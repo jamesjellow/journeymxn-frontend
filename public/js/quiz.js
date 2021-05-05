@@ -1,8 +1,10 @@
 let cardIndex = 0;
 let totalCards = 3;
-setTimeout(() => {
+
+
+$(document).ready(() => {
 	totalCards = $('#quiz li').length;
-}, 1000)
+});
 
 
 $(document).ready(function() 
