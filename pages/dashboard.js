@@ -6,7 +6,7 @@ const Dropdown = dynamic(() => import('../components/dropdown'))
 
 export default function Dashboard() {
   return (
-    <div className="container">
+    <div className={styles["container"]}>
       <Head>
         <title>Journeymxn</title>
         <link rel="icon" href="/favicon.ico" />

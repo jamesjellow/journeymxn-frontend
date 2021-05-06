@@ -2,6 +2,10 @@
 @import "../abstracts/mixins";
 @import "../abstracts/variables";
 
+.container {
+    background-color: $primary-light-grey;
+}
+
 .bar {
     display: flex;
     justify-content: space-between;
@@ -48,32 +52,41 @@
 .data {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     gap: 2rem;
-    background-color: $primary-light-grey;
+    background-color: none;
     padding: 2rem;
 }
 
 .chart {
-    background-color: $primary-dark-grey;
+    border-radius: 30px;
+    background-color: white;
     text-align: center;
-    width: 500px;
+    width: 25%;
     height: 400px; 
+    box-shadow: 0px 4px 10px rgba(66, 66, 66, 0.39);
 }
 .graph {
-    background-color: $primary-dark-grey;
+    background-color: white;
+    border-radius: 30px;
     text-align: center;
-    width: 600px;
+    width: 30%;
     height: 400px;
+    box-shadow: 0px 4px 10px rgba(66, 66, 66, 0.39);
 }
 .graph-2 {
-    background-color: $primary-dark-grey;
+    background-color: white;
+    border-radius: 30px;
     text-align: center;
-    width: 300px;
+    width: 40%;
     height: 400px;
+    box-shadow: 0px 4px 10px rgba(66, 66, 66, 0.39);
 }
 .sheet{
-    background-color: $primary-dark-grey;
+    background-color: white;
+    border-radius: 30px;
     text-align: center;
     width: 100vw;
-    height: 400px;
-}
+    height: 700px;
+    box-shadow: 0px 4px 10px rgba(66, 66, 66, 0.39);
+};
