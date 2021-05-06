@@ -17,10 +17,55 @@ export default function Quiz() {
     dispatch({
       type: 'NEXT',
   });
+
   const handleDecrease = (event) =>
     dispatch({
       type: 'PREV',
   });
+
+  async function callAPI() {
+    let sampleJSON = { "hello" : "world" };
+    const requestOptions = {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      mode: 'no-cors', // no-cors, *cors, same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: 'follow', // manual, *follow, error
+      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      body: "hello"
+    };
+    const response = await fetch("http://localhost:4000/submitForm", requestOptions);
+    console.log(response);
+    return response;
+
+    
+  }
+
+
+  async function submitForm(event) {
+    event.preventDefault();
+    const url = '/submitForm';
+    const someJSON = { "Hello" : "World" };
+    const response = await fetch(url, {
+      mode: 'no-cors',
+      method: "post",
+      headers: {
+           "Content-Type": "application/json"
+      },
+      body : JSON.stringify(someJSON)
+    })
+    
+    if (response.status !== 201)
+      console.error("Could not submit form", response.status)
+    else  
+      console.log(await response.text())
+  
+  }
+
   return (
     <div className="container">
       <Head>
@@ -40,6 +85,12 @@ export default function Quiz() {
         </ul>
         <a className={styles["img-credit"]} href="http://www.freepik.com">Background image designed by Freepik</a>
       </div>
+
+      <form action="#!" onSubmit={submitForm}>
+        <label name="name" htmlFor="inp1">What is your name?</label> 
+        <input type="text" id="inp1" />
+        <button type="submit" className={styles["submit-btn"]}>Submit</button>
+      </form>
       
     </div>
   )

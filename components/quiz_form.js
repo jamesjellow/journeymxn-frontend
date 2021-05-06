@@ -27,7 +27,7 @@ export default function QuizForm({quizState}) {
 	return (
 		<div className={styles["container"]}>
 
-			<ul id="quiz" className={styles["slide-container"]}>
+			{/* <ul id="quiz" className={styles["slide-container"]}>
 				<li id="slide" className={styles["quiz-slide"]}>
 					<div class={`${styles["quiz-slide__content"]} ${styles["quiz-slide__content--1"]}`}>
 						<span>Lorem</span>
@@ -43,7 +43,7 @@ export default function QuizForm({quizState}) {
 						<span>Spani</span>
 					</div>    
 				</li>
-			</ul>
+			</ul> */}
 
 			<span className={`${styles["nav-btn"]} ${styles["nav-btn__left"]} fa fa-chevron-left fa-3x`} id="left-btn"></span>
 			<span className={`${styles["nav-btn"]} ${styles["nav-btn__right"]} fa fa-chevron-right fa-3x`} id="right-btn"></span>
