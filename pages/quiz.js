@@ -3,47 +3,25 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
 import QuizForm from '../components/quiz_form'
-import {useQuiz, useDispatchQuiz} from '../components/quiz_context'
+import {useState, useDispatchState} from '../components/context'
 
 import styles from '../styles/pages/quiz.module.scss'
 
 const NavComponent = dynamic(() => import('../components/navigation'))
 
 export default function Quiz() {
-  const quizState = useQuiz();
-  const dispatch = useDispatchQuiz();
+  const state = useState();
+  const dispatch = useDispatchState();
 
   const handleNext = (event) =>
     dispatch({
-      type: 'NEXT',
+      type: 'QUIZ-NEXT',
   });
 
   const handleDecrease = (event) =>
     dispatch({
-      type: 'PREV',
+      type: 'QUIZ-PREV',
   });
-
-  async function callAPI() {
-    let sampleJSON = { "hello" : "world" };
-    const requestOptions = {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'no-cors', // no-cors, *cors, same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, *same-origin, omit
-      headers: {
-        'Content-Type': 'application/json'
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: 'follow', // manual, *follow, error
-      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: "hello"
-    };
-    const response = await fetch("http://localhost:4000/submitForm", requestOptions);
-    console.log(response);
-    return response;
-
-    
-  }
 
 
   async function submitForm(event) {
@@ -81,7 +59,7 @@ export default function Quiz() {
       
       <div className={styles["contaier"]}>
         <ul id="quiz" className={styles["slide-container"]}>
-         {<QuizForm quizState={quizState} />}
+          <QuizForm quizState={state["current_questions"]} />
         </ul>
         <a className={styles["img-credit"]} href="http://www.freepik.com">Background image designed by Freepik</a>
       </div>
