@@ -1,21 +1,40 @@
+@import "../abstracts/functions";
+@import "../abstracts/mixins";
+@import "../abstracts/variables";
+
 .wrapper {
     display: flex;
     flex-wrap: wrap;
-    min-height: 2rem;
+    justify-content: center;
+    min-height: 3rem;
+    font-family: 'DM Serif Text', serif;
+    font-size: 1.5rem;
+    color: $primary-yellow;
 }
 
-.header {    
+.header {
+    padding: 1rem;
+    width: 100%;
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    background-color: $primary-black;
 }
 
 .list {
+    list-style-type: none;
     width: 100%;
     flex-wrap: wrap;
+    padding: .25rem;
     button {
-        border: none;
+        padding: .5rem .5rem .5rem 2rem;
         display: flex;
         justify-content: space-between;
         width: 100%;
+        font-family: 'DM Serif Text', serif;
+        font-size: 1.25rem;
+        background-color: $primary-black;
+        color: white;
+        border: none;
     }
 }
