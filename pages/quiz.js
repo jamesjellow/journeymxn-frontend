@@ -16,11 +16,11 @@ export default function Quiz() {
   const handleNext = (event) =>
     dispatch({
       type: 'NEXT',
-  })
+  });
   const handleDecrease = (event) =>
     dispatch({
       type: 'PREV',
-  })
+  });
   return (
     <div className="container">
       <Head>
@@ -28,7 +28,6 @@ export default function Quiz() {
         <meta name="viewport" content="width=device-width, initial-scale=0.41, maximum-scale=1" />
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
         <script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript" src="/js/quiz.js"></script>
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text&display=swap" rel="stylesheet" />
       </Head>
