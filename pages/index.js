@@ -60,7 +60,7 @@ export default function Home() {
             Personalized Comprehensive Career Paths
           </h1>
           <h1 className={styles["main__heading-primary--sub"]}>
-            Gain a fresh perspective on what the roadmap to employability looks like from highschool and/or community college.. Find a new pathway to link learning and earning without requiring a college degree.
+            Gain a fresh perspective on what the roadmap to employability looks like from highschool and/or community college. Find a new pathway to link learning and earning without requiring a college degree.
           </h1>
         </div>
         <div className={styles["main-2__img-wrapper"]}>

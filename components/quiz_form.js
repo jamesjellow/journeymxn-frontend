@@ -23,12 +23,7 @@ function makeQuizzes(questions) {
 	});
 }
 
-export default function QuizForm({
-	questions = [{"question": "default question1",
-				  "answers": ["answer1", "answer2", "answer3"]},
-				 {"question": "default question2",
-				  "answers": ["answer1", "answer2", "answer3"]}]
-}) {
+export default function QuizForm({quizState}) {
 	return (
 		<div className={styles["container"]}>
 
