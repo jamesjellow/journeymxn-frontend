@@ -1,0 +1,15 @@
+.dash {
+    display: grid;
+    grid-auto-columns: 1.5fr 8.5fr;
+}
+
+.sidebar{
+    grid-column: 1;
+    height: 100vh;
+    background-color: yellow;
+}
+
+.content {
+    background-color: black;
+    grid-column: 2;
+}

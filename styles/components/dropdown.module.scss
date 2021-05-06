@@ -1,0 +1,21 @@
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 2rem;
+}
+
+.header {    
+    display: flex;
+    justify-content: space-between;
+}
+
+.list {
+    width: 100%;
+    flex-wrap: wrap;
+    button {
+        border: none;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
