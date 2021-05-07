@@ -23,6 +23,12 @@ const reducer = (state, action) => {
 			state.question = questions_and_choices[state.index]["question"];
 			state.choices = questions_and_choices[state.index]["answers"];
 			return state;
+		case 'LOGIN':
+			state.is_login = true;
+			return state;
+		case 'LOGOUT':
+			state.is_login = false;
+			return state;
 		default:
 			throw new Error(`Unknown Action: ${action.type}`)
 	}
@@ -38,6 +44,7 @@ export const StateProvider = ({ children }) => {
 	initial_state["current_career"] = quiz[0]["career"];
 	initial_state["current_questions"] = new Array();
 	initial_state["career_index"] = 0;
+	initial_state["is_login"] = false;
 
 	let current_career = "";
 	quiz.forEach((entry) => {

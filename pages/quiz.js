@@ -23,25 +23,21 @@ export default function Quiz() {
       type: 'QUIZ-PREV',
   });
 
-
-  async function submitForm(event) {
-    event.preventDefault();
-    const url = '/submitForm';
+  async function submitForm() {
+    const url = 'https://journeymxn-api.herokuapp.com/submitForm';
     const someJSON = { "Hello" : "World" };
     const response = await fetch(url, {
-      mode: 'no-cors',
       method: "post",
       headers: {
            "Content-Type": "application/json"
       },
       body : JSON.stringify(someJSON)
     })
-    
+    // console.log(response);
     if (response.status !== 201)
-      console.error("Could not submit form", response.status)
-    else  
+      console.error("Could not submit form")
+    else
       console.log(await response.text())
-  
   }
 
   return (
