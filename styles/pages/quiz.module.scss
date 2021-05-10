@@ -9,19 +9,15 @@
 }
 
 .container {
-	background-image: url(../../public/quiz_background.jpg);
-	background-size: cover;
-    background-repeat: no-repeat;
-    background-position: bottom;
+	background-color: $primary-yellow;
     position: relative;
 
-	height: 95vh;
+	min-height: 95vh;
 
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
+	display: grid;
+	grid-template-rows: auto 10rem;
 
-	padding: 2rem;
+	padding: 2rem 10%;
 }
 
 .img-credit {
@@ -75,22 +71,22 @@
 		&--disabled {
 			pointer-events: none;
 			background-color: rgba($primary-yellow, 0);
-			color: black;
-			border: 1px solid black;
+			color: $color-grey-dark-1;
+			border: 1px solid $color-grey-dark-1;
 		}
 
 		&--enabled {
 			pointer-events: auto;
-			background-color: rgba(black, 1);
+			background-color: rgba($color-grey-dark-1, 1);
 			color: rgba($primary-yellow, 1);
-			border: 1px solid black;
+			border: 1px solid $color-grey-dark-1;
 		}
 	}
 
 	&__page {
 		font-size: 2rem;
 		font-weight: 700;
-		color: black;
+		color: $color-grey-dark-1;
 		letter-spacing: 2px;
 	}
 }

@@ -65,11 +65,13 @@ export default function Quiz() {
 
       <NavComponent />
       
-      <div className={styles["contaier"]}>
-        <ul id="quiz" className={styles["slide-container"]}>
-          <QuizForm quizState={state["current_questions"]} />
-        </ul>
-        <a className={styles["img-credit"]} href="http://www.freepik.com">Background image designed by Freepik</a>
+      <div className={styles["container"]}>
+        <QuizForm />
+        <div className={styles["quiz-nav"]}>
+          <a href="#!" className={`${styles["quiz-nav__btn"]} ${getBtnFunctionalityClass(true)}`} onClick={handlePrev}>previous</a>
+          <h4 className={styles["quiz-nav__page"]} id="quiz-page">{`${state.career_index + 1} / ${state.careers_length}`}</h4>
+          <a href="#!" className={`${styles["quiz-nav__btn"]} ${getBtnFunctionalityClass(false)}`} onClick={handleNext}>next</a>
+        </div>
       </div>
 
       {/* <form action="#!" onSubmit={submitForm}>
@@ -78,11 +80,7 @@ export default function Quiz() {
         <button type="submit" className={styles["submit-btn"]}>Submit</button>
       </form> */}
 
-      <div className={styles["quiz-nav"]}>
-        <a href="#!" className={`${styles["quiz-nav__btn"]} ${getBtnFunctionalityClass(true)}`} onClick={handlePrev}>previous</a>
-        <h4 className={styles["quiz-nav__page"]} id="quiz-page">{`${state.career_index + 1} / ${state.careers_length}`}</h4>
-        <a href="#!" className={`${styles["quiz-nav__btn"]} ${getBtnFunctionalityClass(false)}`} onClick={handleNext}>next</a>
-      </div>
+      
     </div>
   )
 }

@@ -8,6 +8,88 @@
 	overflow:hidden;
 	top:0px;
 	left:0px;
+
+	background-color: rgba($primary-yellow, 0);
+}
+
+.question {
+	display: grid;
+	grid-template-columns: 7rem auto;
+	grid-template-rows: 7rem auto;
+
+	justify-items: center;
+	align-content: center;
+
+	color: $color-grey-dark-1;
+
+	&__number {
+		width: 100%;
+		height: 100%;
+		font-size: 7rem;
+		font-weight: 900;
+		margin-bottom: 2rem;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__question {
+		padding-top: .5rem;
+		font-size: 2rem;
+		font-weight: 900;
+		justify-self: start;
+		text-align: left;
+
+		margin-bottom: 2rem;
+	}
+
+	&__choice-container {
+		margin-top: 2rem;
+		width: 100%;
+		grid-column: 1 / span 2;
+	}
+
+	&__choice {
+		width: 0;
+		height: 0;
+	}
+
+	&__label-container {
+		border: 1px solid $color-grey-dark-1;
+
+		padding: 1rem 2rem;
+	}
+
+	&__label {
+		width: 100%;
+		height: 100%;
+		font-size: 1.8rem;
+		font-weight: 600;
+		text-align: left;
+	}
+
+	&__choice:not(:checked) + &__label-container  {
+		cursor: pointer;
+
+		& > label {
+			cursor: pointer;
+		}
+	}
+
+	&__choice:checked + &__label-container {
+		cursor: default;
+		background-color: rgba($color-grey-dark-1, 1);
+		color: rgba($primary-yellow, 1);
+
+		& > label {
+			cursor: default;
+		}
+	}
+
+	&:not(:last-child) {
+		margin-bottom: 3rem;
+	}
 }
 
 .form {

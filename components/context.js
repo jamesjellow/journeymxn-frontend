@@ -11,7 +11,7 @@ const reducer = (state, action) => {
 	switch (action.type) {
 		case 'NAV-CHANGE':
 			state.page_num = action.page_num;
-			state = JSON.parse(JSON.stringify(state))
+			state = Object.assign({}, state);
 			return state;
 		case 'QUIZ-NEXT':
 			state.career_index +=  1
@@ -22,7 +22,7 @@ const reducer = (state, action) => {
 			endIndex = startIndex + 5;
 			state.current_questions = state.questions.slice(startIndex, endIndex);
 			console.log("next:", state);
-			state = JSON.parse(JSON.stringify(state));
+			state = Object.assign({}, state);
 			return state;
 		case 'QUIZ-PREV':
 			state.career_index -=  1
@@ -33,15 +33,18 @@ const reducer = (state, action) => {
 			endIndex = startIndex + 5;
 			state.current_questions = state.questions.slice(startIndex, endIndex);
 			console.log("prev:", state);
-			state = JSON.parse(JSON.stringify(state));
+			state = Object.assign({}, state);
+			return state;
+		case 'QUIZ-SELECT':
+			state = Object.assign({}, state);
 			return state;
 		case 'LOGIN':
 			state.is_login = true;
-			state = JSON.parse(JSON.stringify(state));
+			state = Object.assign({}, state);
 			return state;
 		case 'LOGOUT':
 			state.is_login = false;
-			state = JSON.parse(JSON.stringify(state));
+			state = Object.assign({}, state);
 			return state;
 		default:
 			throw new Error(`Unknown Action: ${action.type}`)
@@ -57,6 +60,7 @@ export const StateProvider = ({ children }) => {
 	initial_state["careers"] = new Array();
 	initial_state["current_career"] = quiz[0]["career"];
 	initial_state["current_questions"] = new Array();
+	initial_state["career_answers"] = new Array();
 	initial_state["career_index"] = 0;
 	initial_state["careers_length"] = 0;
 	initial_state["is_login"] = false;
