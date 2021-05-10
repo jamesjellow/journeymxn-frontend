@@ -27,7 +27,6 @@ export default function Navigation() {
             <a href="#!" className={styles["large-logo--link"]} onClick={handlePageChange(1, '/')}>
                 <img src="/icon-full.png" alt="journeymxn logo" className={styles["large-logo"]} />
             </a>
-                {state.is_login ? do somthing : do something else}
             <ul className={styles["nav"]}>
                 <li className={styles["nav__item"]} onClick={handlePageChange(1, '/')}>
                     <svg className={styles["nav__icon"]} id="#home-nav" >

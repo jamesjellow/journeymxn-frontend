@@ -18,14 +18,13 @@
 
     // image: linear-gradient(...), url(../../public/header_background2.jpg);
 
-    background: linear-gradient(to right, $primary-yellow, darken($primary-yellow, 10));
+    background: $primary-yellow;
 
     overflow: visible;
 
     background-size: cover;
     background-repeat: no-repeat;
     background-position: bottom;
-    position: relative;
 
     display: grid;
     grid-template-columns: 5fr 7fr;

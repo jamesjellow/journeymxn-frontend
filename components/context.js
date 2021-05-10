@@ -5,29 +5,43 @@ const StateContext = createContext()
 const StateDispatchContext = createContext()
 
 const reducer = (state, action) => {
+	let startIndex;
+	let endIndex;
+
 	switch (action.type) {
 		case 'NAV-CHANGE':
 			state.page_num = action.page_num;
+			state = JSON.parse(JSON.stringify(state))
 			return state;
 		case 'QUIZ-NEXT':
-			state.index += 1
-			if (state.index == max_length)
-				state.index = max_length - 1;
-			state.question = questions_and_choices[state.index]["question"];
-			state.choices = questions_and_choices[state.index]["answers"];
+			state.career_index +=  1
+			if (state.career_index == state.careers_length)
+				state.career_index -= 1;
+			
+			startIndex = state.career_index * 5;
+			endIndex = startIndex + 5;
+			state.current_questions = state.questions.slice(startIndex, endIndex);
+			console.log("next:", state);
+			state = JSON.parse(JSON.stringify(state));
 			return state;
 		case 'QUIZ-PREV':
-			state.index -= 1
-			if (state.index == max_length)
-				state.index = max_length - 1;
-			state.question = questions_and_choices[state.index]["question"];
-			state.choices = questions_and_choices[state.index]["answers"];
+			state.career_index -=  1
+			if (state.career_index == -1)
+				state.career_index += 1;
+			
+			startIndex = state.career_index * 5;
+			endIndex = startIndex + 5;
+			state.current_questions = state.questions.slice(startIndex, endIndex);
+			console.log("prev:", state);
+			state = JSON.parse(JSON.stringify(state));
 			return state;
 		case 'LOGIN':
 			state.is_login = true;
+			state = JSON.parse(JSON.stringify(state));
 			return state;
 		case 'LOGOUT':
 			state.is_login = false;
+			state = JSON.parse(JSON.stringify(state));
 			return state;
 		default:
 			throw new Error(`Unknown Action: ${action.type}`)
@@ -44,6 +58,7 @@ export const StateProvider = ({ children }) => {
 	initial_state["current_career"] = quiz[0]["career"];
 	initial_state["current_questions"] = new Array();
 	initial_state["career_index"] = 0;
+	initial_state["careers_length"] = 0;
 	initial_state["is_login"] = false;
 
 	let current_career = "";
@@ -57,6 +72,8 @@ export const StateProvider = ({ children }) => {
 			initial_state["current_questions"].push(entry);
 		}
 	});
+
+	initial_state["careers_length"] = initial_state["careers"].length;
 
 	console.log(initial_state);
 
