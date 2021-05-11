@@ -9,15 +9,15 @@
 }
 
 .container {
-	background-image: url(../../public/quiz_background.jpg);
-	background-size: cover;
-    background-repeat: no-repeat;
-    background-position: bottom;
+	background-color: $primary-yellow;
     position: relative;
 
-	height: 90vh;
+	min-height: 95vh;
 
-	padding: 6rem 4rem;
+	display: grid;
+	grid-template-rows: auto 10rem;
+
+	padding: 2rem 10%;
 }
 
 .img-credit {
@@ -27,4 +27,66 @@
 
 	text-decoration: none;
 	font-size: 1rem;
+}
+
+.submit-btn {
+	z-index: 20;
+	opacity: 1;
+	height: 10rem;
+	width: 20rem;
+	background-color: green;
+}
+
+.quiz-nav {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+
+	&__btn {
+		&,
+		&:link,
+		&:visited {
+			font-size: 2rem;
+			text-decoration: none;
+			letter-spacing: 1px;
+
+			width: 12rem;
+			height: 4rem;
+			padding-bottom: .4rem;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			border-radius: 4px;
+			
+			@include respond('tab-port') {
+				font-size: 2.8rem;
+				width: 20rem;
+				height: 6rem;
+				border-radius: 8px;
+			}
+		}
+
+		&--disabled {
+			pointer-events: none;
+			background-color: rgba($primary-yellow, 0);
+			color: $color-grey-dark-1;
+			border: 1px solid $color-grey-dark-1;
+		}
+
+		&--enabled {
+			pointer-events: auto;
+			background-color: rgba($color-grey-dark-1, 1);
+			color: rgba($primary-yellow, 1);
+			border: 1px solid $color-grey-dark-1;
+		}
+	}
+
+	&__page {
+		font-size: 2rem;
+		font-weight: 700;
+		color: $color-grey-dark-1;
+		letter-spacing: 2px;
+	}
 }

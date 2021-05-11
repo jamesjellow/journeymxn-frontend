@@ -1,0 +1,71 @@
+// .header {
+//     width: 100%;
+//     height: 60vh;
+
+//     // image: linear-gradient(...), url(../../public/header_background2.jpg);
+
+//     background: linear-gradient(to right, $primary-yellow, darken($primary-yellow, 10));
+
+//     // -webkit-clip-path: polygon(4rem 0, 100% 0, 100% 70vh, 4rem 70vh);
+//     // clip-path: polygon(0 0, 100% 0, 100% 70vh, 0 70vh);
+
+//     overflow: visible;
+
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//     background-position: bottom;
+//     position: relative;
+
+//     display: grid;
+//     grid-template-columns: 5fr 7fr;
+//     gap: 4rem;
+
+//     padding: 0 10%;
+
+//     margin-bottom: 1rem;
+
+//     &__heading-container {
+//         height: 100%;
+//         width: 100%;
+
+//         display: flex;
+//         flex-direction: column;
+//         justify-content: space-evenly;
+//         align-content: center;
+        
+//         text-align: center;
+
+//         & > .btn {
+//             align-self: center;
+//             width: 40%;
+//         }
+//     }
+
+//     &__heading-primary{
+//         &--main  {
+//             color: black;
+//             font-size: 3rem;
+//             letter-spacing: 2px;
+//             font-weight: 500;
+//             text-transform: capitalize;
+//         }
+
+//         &--sub {
+//             color: $color-grey-dark-1;
+//             font-size: 2rem;
+//         }
+
+//     }
+
+//     &__img-wrapper {
+//         height: 100%;
+//         width: 100%;
+//         overflow: visible;
+//     }
+
+//     &__img {
+//         object-fit: cover;
+//         height: 115%;
+//         width: 100%;
+//     }
+// }
