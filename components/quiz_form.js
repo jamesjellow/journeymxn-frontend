@@ -37,7 +37,7 @@ export default function QuizForm() {
 		return questions.map((question, index) => {
 			return (
 				<div className={styles["question"]}>
-					<h4 className={styles["question__number"]}>{index + 1}.</h4>
+					<h4 className={styles["question__number"]}>{state.career_index * 5 + index + 1}.</h4>
 					<h4 className={styles["question__question"]}>{question.question}</h4>
 					<div className={styles["question__choice-container"]}>
 						<input type="radio" name={`q${index}`} id={`q${index}-high`} className={styles["question__choice"]} onChange={handleInputChange(state.career_index * 5 + index, question.career, question.skill, 1)}></input>
