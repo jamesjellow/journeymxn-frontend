@@ -37,10 +37,10 @@ export default function Dashboard() {
           <option value="Architecture and Engineering">Architecture and Engineering</option>
           <option value="Public Service">Public Service</option>
         </select>
-        <h1>Skillset</h1>
+        <h1>Skill Set</h1>
         <select name="SkillSets" id="skillsets">
         <option value="none" selected disabled hidden>
-            Choose an SkillSet
+            Choose a Skill Set
           </option>
           <option value="Presentation">Presentation</option>
           <option value="Critical thinking">Critical thinking</option>
