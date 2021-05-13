@@ -1,4 +1,4 @@
-import { useReducer, useContext, createContext } from 'react'
+import { useReducer, useContext, createContext, useEffect} from 'react'
 import jsonData from '../public/json/quiz.json'
 
 const StateContext = createContext()
@@ -15,8 +15,9 @@ const reducer = (state, action) => {
 			return state;
 		case 'QUIZ-NEXT':
 			state.career_index +=  1
-			if (state.career_index == state.careers_length)
-				state.career_index -= 1;
+			if (state.career_index == state.careers_length) {
+				state.quiz_done = true;
+			}
 			
 			startIndex = state.career_index * 5;
 			endIndex = startIndex + 5;
@@ -25,7 +26,7 @@ const reducer = (state, action) => {
 			state = Object.assign({}, state);
 			return state;
 		case 'QUIZ-PREV':
-			state.career_index -=  1
+			state.career_index -= 1;
 			if (state.career_index == -1)
 				state.career_index += 1;
 			
@@ -36,6 +37,11 @@ const reducer = (state, action) => {
 			state = Object.assign({}, state);
 			return state;
 		case 'QUIZ-SELECT':
+			state.selections[action.career][action.skill] = action.score;
+			state = Object.assign({}, state);
+			return state;
+		case 'QUIZ-END':
+			state.quiz_done = false;
 			state = Object.assign({}, state);
 			return state;
 		case 'LOGIN':
@@ -47,7 +53,7 @@ const reducer = (state, action) => {
 			state = Object.assign({}, state);
 			return state;
 		default:
-			throw new Error(`Unknown Action: ${action.type}`)
+			throw new Error(`Unknown Action: ${action.type}`);
 	}
 }
 
@@ -60,10 +66,13 @@ export const StateProvider = ({ children }) => {
 	initial_state["careers"] = new Array();
 	initial_state["current_career"] = quiz[0]["career"];
 	initial_state["current_questions"] = new Array();
+	initial_state["selections"] = new Object();
 	initial_state["career_answers"] = new Array();
 	initial_state["career_index"] = 0;
 	initial_state["careers_length"] = 0;
+	initial_state["question_start"] = false;
 	initial_state["is_login"] = false;
+	initial_state["quiz_done"] = false;
 
 	let current_career = "";
 	quiz.forEach((entry) => {
@@ -75,6 +84,10 @@ export const StateProvider = ({ children }) => {
 		if (entry["career"] == initial_state["current_career"]) {
 			initial_state["current_questions"].push(entry);
 		}
+
+		if (initial_state["selections"][entry["career"]] == undefined)
+			initial_state["selections"][entry["career"]] = new Object();
+		initial_state["selections"][entry["career"]][entry["skill"]] = null; // -2 is none, -1 is low, 0 is med, 1 is high
 	});
 
 	initial_state["careers_length"] = initial_state["careers"].length;

@@ -29,7 +29,7 @@ export default function Quiz() {
   const getBtnFunctionalityClass = (isPrev) => {
     if (state.career_index == 0 && isPrev)
       return styles["quiz-nav__btn--disabled"];
-    if (state.career_index == state.careers_length - 1 && !isPrev)
+    if (state.career_index == state.careers_length && !isPrev)
       return styles["quiz-nav__btn--disabled"];
     return styles["quiz-nav__btn--enabled"];
   }
@@ -69,18 +69,13 @@ export default function Quiz() {
         <QuizForm />
         <div className={styles["quiz-nav"]}>
           <a href="#!" className={`${styles["quiz-nav__btn"]} ${getBtnFunctionalityClass(true)}`} onClick={handlePrev}>previous</a>
-          <h4 className={styles["quiz-nav__page"]} id="quiz-page">{`${state.career_index + 1} / ${state.careers_length}`}</h4>
+          <h4 className={styles["quiz-nav__page"]} id="quiz-page">{`${state.career_index + 1} / ${state.careers_length + 1}`}</h4>
           <a href="#!" className={`${styles["quiz-nav__btn"]} ${getBtnFunctionalityClass(false)}`} onClick={handleNext}>next</a>
         </div>
       </div>
 
-      {/* <form action="#!" onSubmit={submitForm}>
-        <label name="name" htmlFor="inp1">What is your name?</label> 
-        <input type="text" id="inp1" />
-        <button type="submit" className={styles["submit-btn"]}>Submit</button>
-      </form> */}
-
-      
+      <script type="text/javascript" src="../public/js/quiz.js">
+      </script>
     </div>
   )
 }
