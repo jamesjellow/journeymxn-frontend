@@ -24,6 +24,27 @@ export default function Quiz() {
       </div>
     )
   }
+
+  function getSelected(id)
+  {
+    const select = document.getElementById(id)
+    const choice = select.options[select.selectedIndex].value
+    return choice
+  }
+
+  function getInput(id) {
+    return document.getElementById(id).value
+  }
+
+  function filterValues() {
+    const values = {
+      industry: getSelected('industries'),
+      skillset: getSelected('skillsets'),
+      zip: getInput('zip')
+    }
+    console.log(values)
+  }
+
   return (
     <div className="container">
       <Head>
@@ -42,7 +63,7 @@ export default function Quiz() {
       <section className={styles["filters"]}>
         <h1>Filter By: </h1>
         <h1>Zip Code </h1>
-        <input type="text" placeholder="Enter ZipCode" name="uname" required className={styles["zip_input"]}/>
+        <input type="text" placeholder="Enter ZipCode" name="uname" required className={styles["zip_input"]} id="zip"/>
         <h1>Industry</h1>
         <select name="industries" id="industries">
           <option value="none" selected disabled hidden>
@@ -88,7 +109,7 @@ export default function Quiz() {
           <option value="Coordination">Coordination</option>
           <option value="Logical thinking">Logical thinking</option>
         </select>
-        <input className={styles["submit"]} type="submit" value="Submit"/>
+        <input className={styles["submit"]} type="button" value="Submit" onClick={filterValues} />
       </section>
       <section className={styles["data"]}>
         <div className={styles["chart"]}>
