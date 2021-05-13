@@ -1,10 +1,29 @@
 import Head from 'next/head'
-import dynamic from 'next/dynamic'
-import Link from 'next/link'
-
+import {useState, useDispatchState} from '../components/context'
+import {useEffect} from 'react'
 import styles from '../styles/pages/login.module.scss'
 
 export default function Login() {
+  
+  const state = useState();
+  const dispatch = useDispatchState();  
+  console.log(state.is_login)
+
+  if(!state.is_login)
+  {
+    const changePage = useEffect(() => { window.location.href = '/admin'; });
+    changePage
+    return (
+      <div className={styles["redirect"]}>
+          <div className={styles["logo"]}>
+              <img src="/icon-256.png" alt="journeymxn-logo" className={styles["icon-logo"]}/>
+              <h1>journeymxn</h1>
+              <h1>Redirecting...</h1>
+          </div>
+      </div>
+    )
+  }
+
   return (
     <div className={styles["container"]}>
       <link rel="preconnect" href="https://fonts.gstatic.com"/>
