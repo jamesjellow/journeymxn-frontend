@@ -3,20 +3,13 @@ import {useState, useDispatchState} from '../components/context'
 
 import styles from '../styles/components/quiz_form.module.scss'
 import stateJSON from '../public/json/state.json'
-import { Router } from 'next/router';
+import { Router, useRouter } from 'next/router';
 
-function makeQuizzes(questions) {
-	questions.forEach((qna_pair, index) => {
-		let question = qna_pair["question"];
-		let answers = qna_pair["answers"];
-
-		let htmlDOM = 1;
-	});
-}
 
 export default function QuizForm() {
 	const state = useState();
   	const dispatch = useDispatchState();
+	const router = useRouter();
 
 	const questions = state.questions;
 
@@ -35,7 +28,7 @@ export default function QuizForm() {
 	}
 
 	const submit = async (e) => {
-		// e.preventDefault();
+		e.preventDefault();
 		let stateName = document.querySelector("#state").value
 		let schoolDist = document.querySelector("#school-dist").value;
 		let schoolName = document.querySelector("#school").value;
@@ -47,15 +40,15 @@ export default function QuizForm() {
 		let responses = [];
 		for (const [career, value] of Object.entries(state.selections)) {
 			for (const [skill, score] of Object.entries(value)) {
-				responses.push({"career": career, "skill": skill, "score": score})
+				responses.push({"industry": career, "skill": skill, "score": score})
 			}
 		}
 
 		let submission = {
 			"emailto": email,
 			"state": stateName,
-			"school district": schoolDist,
-			"school": schoolName,
+			"school_district": schoolDist,
+			"school_name": schoolName,
 			"responses": responses
 		}
 
@@ -70,17 +63,20 @@ export default function QuizForm() {
 			body : JSON.stringify(submission)
 		});
 		// console.log(response);
-		if (response.status !== 201)
+		if (response.status !== 201) {
 			console.error("Could not submit form")
 			// Popup and say error submitting form
-		else {
+			alert("We could not submit the form. Please try again.");
+		} else {
 			console.log(await response.text());
 			state.finished_form = true;
 			// redirect them to /formSumitted
+			router.push('/formSubmitted')
 		}
-			
+		
 	};
 
+	
 
 	const onInvalidEmail = (e) => {
 		return e.target.setCustomValidity("Please type in your email correctly.");
@@ -151,11 +147,13 @@ export default function QuizForm() {
 						</select>
 					</div>
 					<div className={styles["submit__submit-box"]}>
-						<label htmlFor="email">Your Email</label>
-						<input id="email" pattern="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$" onInvalid={onInvalidEmail} required></input>
+						<label htmlFor="email" className={styles["submit__label"]}>Your Email</label>
+						<input type="email" id="email" onInvalid={onInvalidEmail} required className={styles["submit__input"]}></input>
 					</div>
 					
 					<button type="submit" className={styles["submit__submit-btn"]} onClick={submit}>Submit</button>
+
+					<img src="icon.svg" alt="icon" className={styles["submit__icon"]}/>
 				</form>
 			);
 		}	

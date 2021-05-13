@@ -187,6 +187,8 @@
 
 
 .submit {
+	font-family: 'DM Serif Text', 'Open Sans', sans-serif;
+
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: 10rem auto;
@@ -194,16 +196,52 @@
 	justify-items: flex-start;
 	color: black;
 
-	&__title {
-		font-size: 2rem;
+	position: relative;
 
+	&__title {
+		font-size: 4rem;
+		font-weight: 700;
+		letter-spacing: 2px;
+		margin-top: 4rem;
 	}
 
 	&__submit-box {
+		margin-top: 2rem;
+
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		align-items: center;
+	}
+
+	&__dropdown {
+		// A reset of styles, including removing the default dropdown arrow
+		// appearance: none;
+		// Additional resets for further consistency
+		// background-color: transparent;
+		border: 2px solid black;
+		padding: .5rem 1rem;
+		width: 30.8rem;
+
+		font-size: 1.6rem;
+		font-weight: 500;
+		letter-spacing: 1px;
+	}
+
+	&__input {
+		border: 2px solid black;
+		padding: .5rem 1rem;
+
+		font-size: 1.6rem;
+		font-weight: 500;
+		letter-spacing: 1px;
+
+		width: 30.8rem;
+	}
+
+	&__label {
+		font-size: 2rem;
+		font-weight: 600;
+
 	}
 
 	
@@ -211,13 +249,13 @@
 		&,
 		&:link,
 		&:visited {
+			font-family: inherit;
 			font-size: 2rem;
 			text-decoration: none;
 			letter-spacing: 1px;
 
 			width: 12rem;
 			height: 4rem;
-			padding-bottom: .4rem;
 
 			display: flex;
 			justify-content: center;
@@ -238,5 +276,14 @@
 				border-radius: 8px;
 			}
 		}
-	}	
+	}
+	
+	&__icon {
+		width: 70rem;
+		height: 70rem;
+
+		position: absolute;
+		top: -2rem;
+		right: -30rem;
+	}
 }
