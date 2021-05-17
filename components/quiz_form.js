@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import {useEffect} from 'react'
 import {useState, useDispatchState} from '../components/context'
 
 import styles from '../styles/components/quiz_form.module.scss'
@@ -63,7 +64,7 @@ export default function QuizForm() {
 			body : JSON.stringify(submission)
 		});
 		// console.log(response);
-		if (response.status !== 201) {
+		if (response.status != 201) {
 			console.error("Could not submit form")
 			// Popup and say error submitting form
 			alert("We could not submit the form. Please try again.");
@@ -83,10 +84,53 @@ export default function QuizForm() {
 	};
 
 	const listStateOptions = () => {
-		let states = ['AK', 'AL', 'AR', 'AS', 'AZ', 'BI', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'GU', 'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'VI', 'VT', 'WA', 'WI', 'WV', 'WY'];
+		let states = ['CA', 'AK', 'AL', 'AR', 'AS', 'AZ', 'BI', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'GU', 'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'VI', 'VT', 'WA', 'WI', 'WV', 'WY'];
 
 
 		return states.map((elm) => {return (<option value={elm}>{elm}</option>)})
+	}
+
+	const quizEnd = () => {
+		return (
+			<form className={styles["submit"]}>
+				<h4 className={styles["submit__title"]}>Almost Done!</h4>
+				<div className={styles["submit__submit-box"]}>
+					<h4 className={styles["submit__label"]}>Find Your State</h4>
+					<select className={styles["submit__dropdown"]} name="state" id="state">
+						{listStateOptions()}
+					</select>
+				</div>
+				<div className={styles["submit__submit-box"]}>
+					<h4 className={styles["submit__label"]}>Find your school district</h4>
+					<select className={styles["submit__dropdown"]} name="school-dist" id="school-dist">
+						<option value="Huntington Beach Union High">Huntington Beach Union High</option>
+					</select>
+				</div>
+				<div className={styles["submit__submit-box"]}>
+					<h4 className={styles["submit__label"]}>Find your school</h4>
+					<select className={styles["submit__dropdown"]} name="school" id="school">
+						<option value="Edison High">Edison High</option>
+						<option value="Fountain Valley High">Fountain Valley High</option>
+						<option value="Huntington Beach Adult School">Huntington Beach Adult School</option>
+						<option value="Huntington Beach High">Huntington Beach High</option>
+						<option value="Ocean View High">Ocean View High</option>
+						<option value="Marina High">Marina High</option>
+						<option value="Valley Vista High (Continuation)">Valley Vista High (Continuation)</option>
+						<option value="Westminster High School">Westminster High School</option>
+						<option value="Huntington Beach Adult School">Huntington Beach Adult School</option>
+						<option value="Coast High">Coast High</option>
+					</select>
+				</div>
+				<div className={styles["submit__submit-box"]}>
+					<label htmlFor="email" className={styles["submit__label"]}>Your Email</label>
+					<input type="email" id="email" onInvalid={onInvalidEmail} required className={styles["submit__input"]}></input>
+				</div>
+				
+				<button type="submit" className={styles["submit__submit-btn"]} onClick={submit}>Submit</button>
+
+				<img src="icon.svg" alt="icon" className={styles["submit__icon"]}/>
+			</form>
+			);
 	}
 
 	const makeQuestionHTML = (questions) => {
@@ -119,47 +163,14 @@ export default function QuizForm() {
 				)
 			});
 		} else {
-			return (
-				<form className={styles["submit"]}>
-					<h4 className={styles["submit__title"]}>Almost Done!</h4>
-					<div className={styles["submit__submit-box"]}>
-						<h4 className={styles["submit__label"]}>Find Your State</h4>
-						<select className={styles["submit__dropdown"]} name="state" id="state">
-							{listStateOptions()}
-						</select>
-					</div>
-					<div className={styles["submit__submit-box"]}>
-						<h4 className={styles["submit__label"]}>Find your school district</h4>
-						<select className={styles["submit__dropdown"]} name="school-dist" id="school-dist">
-							<option value="Huntington Beach Union High">Huntington Beach Union High</option>
-						</select>
-					</div>
-					<div className={styles["submit__submit-box"]}>
-						<h4 className={styles["submit__label"]}>Find your school</h4>
-						<select className={styles["submit__dropdown"]} name="school" id="school">
-							<option value="Edison High">Edison High</option>
-							<option value="Fountain Valley High">Fountain Valley High</option>
-							<option value="Huntington Beach High">Huntington Beach High</option>
-							<option value="Ocean View High">Ocean View High</option>
-							<option value="Marina High">Marina High</option>
-							<option value="Valley Vista High (Continuation)">Valley Vista High (Continuation)</option>
-							<option value="Coast High">Coast High</option>
-						</select>
-					</div>
-					<div className={styles["submit__submit-box"]}>
-						<label htmlFor="email" className={styles["submit__label"]}>Your Email</label>
-						<input type="email" id="email" onInvalid={onInvalidEmail} required className={styles["submit__input"]}></input>
-					</div>
-					
-					<button type="submit" className={styles["submit__submit-btn"]} onClick={submit}>Submit</button>
-
-					<img src="icon.svg" alt="icon" className={styles["submit__icon"]}/>
-				</form>
-			);
+			return quizEnd();
 		}	
 	}
 
-	console.log(questions);
+	useEffect(() => {
+		dispatch({type: 'LOAD'})
+	}, []);
+	
 	return (
 		<div className={styles["container"]}>
 			{makeQuestionHTML(state.current_questions)}

@@ -1,6 +1,8 @@
 import App from 'next/app'
 import Head from 'next/head'
+// import React, { useState, useEffect } from 'react';
 import { StateProvider } from '../components/context'
+import { StateManagement } from '../components/state'
 
 import '../styles/main.scss'
 

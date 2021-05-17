@@ -9,12 +9,18 @@ const reducer = (state, action) => {
 	let endIndex;
 
 	switch (action.type) {
-		case 'NAV-CHANGE':
-			state.page_num = action.page_num;
+		case 'QUIZ-START':
+			state.quiz_start = false;
 			state = Object.assign({}, state);
-			return state;
+			sessionStorage.setItem('state', JSON.stringify(state));
+			return state
 		case 'QUIZ-NEXT':
-			state.career_index +=  1
+			if (state.quiz_start) {
+				state.quiz_start = false;
+			} else {
+				state.career_index +=  1
+			}
+			
 			if (state.career_index == state.careers_length) {
 				state.quiz_done = true;
 			}
@@ -24,33 +30,47 @@ const reducer = (state, action) => {
 			state.current_questions = state.questions.slice(startIndex, endIndex);
 			console.log("next:", state);
 			state = Object.assign({}, state);
+			sessionStorage.setItem('state', JSON.stringify(state));
 			return state;
 		case 'QUIZ-PREV':
 			state.career_index -= 1;
-			if (state.career_index == -1)
+			if (state.career_index == -1) {
 				state.career_index += 1;
-			
+			}
+				
+
+			state.quiz_done = false;
 			startIndex = state.career_index * 5;
 			endIndex = startIndex + 5;
 			state.current_questions = state.questions.slice(startIndex, endIndex);
 			console.log("prev:", state);
 			state = Object.assign({}, state);
+			window.sessionStorage.setItem('state', JSON.stringify(state))
 			return state;
 		case 'QUIZ-SELECT':
 			state.selections[action.career][action.skill] = action.score;
 			state = Object.assign({}, state);
+			window.sessionStorage.setItem('state', JSON.stringify(state));
 			return state;
 		case 'QUIZ-END':
 			state.quiz_done = false;
 			state = Object.assign({}, state);
+			window.sessionStorage.setItem('state', JSON.stringify(state));
 			return state;
 		case 'LOGIN':
 			state.is_login = true;
 			state = Object.assign({}, state);
+			window.sessionStorage.setItem('state', JSON.stringify(state));
 			return state;
 		case 'LOGOUT':
 			state.is_login = false;
 			state = Object.assign({}, state);
+			return state;
+		case 'LOAD':
+			let temp = JSON.parse(window.sessionStorage.getItem('state'));
+			if (temp) {
+				state = temp;
+			}
 			return state;
 		default:
 			throw new Error(`Unknown Action: ${action.type}`);
@@ -61,7 +81,6 @@ export const StateProvider = ({ children }) => {
 	let quiz = jsonData;
 	console.log(quiz)
 	const initial_state = new Object();
-	initial_state["page_num"] = 1;
 	initial_state["questions"] = quiz;
 	initial_state["careers"] = new Array();
 	initial_state["current_career"] = quiz[0]["career"];
@@ -72,6 +91,7 @@ export const StateProvider = ({ children }) => {
 	initial_state["careers_length"] = 0;
 	initial_state["question_start"] = false;
 	initial_state["is_login"] = false;
+	initial_state["quiz_start"] = true;
 	initial_state["quiz_done"] = false;
 
 	let current_career = "";
@@ -95,6 +115,10 @@ export const StateProvider = ({ children }) => {
 	console.log(initial_state);
 
 	const [state, dispatch] = useReducer(reducer, initial_state);
+
+	useEffect(() => {
+		dispatch({type: 'LOAD'})
+	}, []);
 
 	return (
 		<StateDispatchContext.Provider value={dispatch}>

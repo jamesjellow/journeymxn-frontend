@@ -28,7 +28,7 @@ export default function formSubmitted() {
           </div>
           <div className={styles["confirm__message"]}>
             <h4 className={styles["confirm__message-text"]}>Your quiz has been succesfully submitted. An email with the results of your assessmens has been sent. We hope you enjoyed our assessment!</h4>
-            <Link href="/home">
+            <Link href="/">
               <a href="#!" className={styles["confirm__btn"]}>return home</a>
             </Link>
           </div>
