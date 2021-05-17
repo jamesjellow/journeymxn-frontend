@@ -3,13 +3,15 @@
 @import "../abstracts/variables";
 
 .container {
-	width:100%;
-	height:100%;
-	overflow:hidden;
+	width: 100%;
+	max-width: 100%;
+	height: 100%;
+	overflow: visible;
 	top:0px;
 	left:0px;
+	position: relative;
 
-	background-color: rgba($primary-yellow, 0);
+	background-color: rgba($primary-yellow, 1);
 }
 
 .question {
@@ -20,6 +22,9 @@
 	align-items: start;
 
 	color: $color-grey-dark-1;
+	margin-top: 3rem;
+
+	z-index: 3;
 
 	&__number {
 		width: 100%;
@@ -27,6 +32,7 @@
 		font-size: 7rem;
 		font-weight: 900;
 		margin-bottom: 2rem;
+		padding-top: .4rem;
 
 		display: flex;
 		justify-content: center;
@@ -34,19 +40,24 @@
 	}
 
 	&__question {
-		padding-top: .5rem;
-		font-size: 2rem;
+		padding-top: 0rem;
+		font-size: 2.6rem;
 		font-weight: 900;
 		justify-self: start;
 		text-align: left;
 
+		width: 100%;
+		overflow-wrap: anywhere;
+
 		margin-bottom: 2rem;
+		z-index: 3;
 	}
 
 	&__choice-container {
-		margin-top: 2rem;
+		margin-top: .4rem;
 		width: 100%;
 		grid-column: 1 / span 2;
+		z-index: 3;
 	}
 
 	&__choice {
@@ -56,8 +67,14 @@
 
 	&__label-container {
 		border: 1px solid $color-grey-dark-1;
+		filter: drop-shadow(6px 6px rgba($color-grey-dark-1, .85));
+
+		background-color: $color-grey-light-3;
 
 		padding: 1rem 2rem;
+		overflow: visible;
+
+		transition: all .2s ease-out;
 	}
 
 	&__label {
@@ -86,8 +103,21 @@
 		}
 	}
 
+	&__choice:active + &__label-container {
+		transform: translate(3px, 3px);
+	}
+
 	&:not(:last-child) {
-		margin-bottom: 3rem;
+		margin-bottom: 2rem;
+	}
+
+	&__icon {
+		width: 90%;
+
+		position: absolute;
+		right: -45%;
+		top: -5%;
+		z-index: 1;
 	}
 }
 
@@ -107,7 +137,7 @@
 	justify-content: space-around;
 }
 
-.quiz {
+.submit {
 	&__submit-btn {
 		text-transform: uppercase;
         text-decoration: none;
@@ -170,62 +200,104 @@
 }
 
 
-// Navigation Buttons
+.submit {
+	font-family: 'DM Serif Text', 'Open Sans', sans-serif;
 
-.nav-btn {
-	position: fixed; 
-	z-index: 5; 
-	top: 50%; 
-	cursor: pointer; 
-	color: $color-grey-dark-2; 
-	opacity: 0.7; 
-	transition: all 0.6s ease;
-
-	&__left {
-		left: 8%;
-	}
-
-	&__right {
-		right: 8%;
-	}
-
-	&:hover {
-		opacity: 1;
-	}
-}
-
-.slide-container {
-	position: absolute;
-	height: 100%;
-	width: 100%;
-
-	background-color: $color-grey-light-2;
-	box-shadow: 2rem 2rem 2rem rgba($color-grey-dark-2, 0.7);
-
-	transition: all 0.66s ease;
-  
-	-webkit-transform: translate3d(0px,0px,0px);
-	transform: translate3d(0px,0px,0px);
-}
-
-.quiz-slide {
-	list-style:none;
-	height: 100%;
-	width: 100%;
-	float: left;
-	position: relative;
-	background-color: white;
-
-	background-size: cover; 
-  	background-position: 50% 50%;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 10rem auto;
 	
-	transform: translate3d(0, 0, 0);
-	transform-style: preserve-3d;
-	visibility: hidden;
+	justify-items: flex-start;
+	color: black;
 
-	background-color: $color-grey-light-2;
-	box-shadow: 2rem 2rem 2rem rgba($color-grey-dark-2, 0.7);
+	position: relative;
 
-	transition: all .6s ease;
+	&__title {
+		font-size: 4rem;
+		font-weight: 700;
+		letter-spacing: 2px;
+		margin-top: 4rem;
+	}
+
+	&__submit-box {
+		margin-top: 2rem;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	&__dropdown {
+		// A reset of styles, including removing the default dropdown arrow
+		// appearance: none;
+		// Additional resets for further consistency
+		// background-color: transparent;
+		border: 2px solid black;
+		padding: .5rem 1rem;
+		width: 30.8rem;
+
+		font-size: 1.6rem;
+		font-weight: 500;
+		letter-spacing: 1px;
+	}
+
+	&__input {
+		border: 2px solid black;
+		padding: .5rem 1rem;
+
+		font-size: 1.6rem;
+		font-weight: 500;
+		letter-spacing: 1px;
+
+		width: 30.8rem;
+	}
+
+	&__label {
+		font-size: 2rem;
+		font-weight: 600;
+
+	}
+
+	
+	&__submit-btn {
+		&,
+		&:link,
+		&:visited {
+			font-family: inherit;
+			font-size: 2rem;
+			text-decoration: none;
+			letter-spacing: 1px;
+
+			width: 12rem;
+			height: 4rem;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			border-radius: 4px;
+			margin-top: 4rem;
+
+			pointer-events: auto;
+			background-color: rgba($color-grey-dark-1, 1);
+			color: rgba($primary-yellow, 1);
+			border: 1px solid $color-grey-dark-1;
+			
+			@include respond('tab-port') {
+				font-size: 2.8rem;
+				width: 20rem;
+				height: 6rem;
+				border-radius: 8px;
+			}
+		}
+	}
+	
+	&__icon {
+		width: 70rem;
+		height: 70rem;
+
+		position: absolute;
+		top: -2rem;
+		right: -30rem;
+	}
 }
-

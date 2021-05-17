@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import useEffect from 'react';
 
 import styles from '../styles/components/navigation.module.scss'
 import {useState, useDispatchState} from '../components/context'
@@ -7,54 +8,48 @@ export default function Navigation() {
     const router = useRouter();
     const state = useState();
     const dispatch = useDispatchState();
+    
 
-    const handlePageChange = (page_num, path) => {
+    const handlePageChange = (path) => {
         return (event) => {
             event.preventDefault();
-            dispatch({type: 'NAV-CHANGE', "page_num": page_num});
             router.push(path);
         };
     };
 
-    const getIconUrl = (state, page_num) => {
-        if (state.page_num == page_num)
+    const getIconUrl = (path) => {
+        let pathname = router.pathname;
+
+        if (path == pathname)
             return "/sprite.svg#icon-check_box"
         return "/sprite.svg#icon-check_box_outline_blank"
     };
 
     return (
         <nav className={styles["nav-bar"]}>
-            <a href="#!" className={styles["large-logo--link"]} onClick={handlePageChange(1, '/')}>
+            <a href="#!" className={styles["large-logo--link"]} onClick={handlePageChange('/')}>
                 <img src="/icon-full.png" alt="journeymxn logo" className={styles["large-logo"]} />
             </a>
             <ul className={styles["nav"]}>
-                <li className={styles["nav__item"]} onClick={handlePageChange(1, '/')}>
+                <li className={styles["nav__item"]} onClick={handlePageChange('/')}>
                     <svg className={styles["nav__icon"]} id="#home-nav" >
-                        <use xlinkHref={getIconUrl(state, 1)} />
+                        <use xlinkHref={getIconUrl('/')} />
                     </svg>
                     <a href="#!" className={styles["nav__link"]}>
                         <span>home</span>
                     </a>
                 </li>
-                <li className={styles["nav__item"]} onClick={handlePageChange(2, '/quiz')}>
+                <li className={styles["nav__item"]} onClick={handlePageChange('/quiz')}>
                     <svg className={styles["nav__icon"]}>
-                        <use xlinkHref={getIconUrl(state, 2)} />
+                        <use xlinkHref={getIconUrl('/quiz')} />
                     </svg>
                     <a href="#!" className={styles["nav__link"]}>
                         <span>quiz</span>
                     </a>
                 </li>
-                <li className={styles["nav__item"]} onClick={handlePageChange(3, '/admin')}>
+                <li className={styles["nav__item"]} onClick={handlePageChange('/about')}>
                     <svg className={styles["nav__icon"]}>
-                        <use xlinkHref={getIconUrl(state, 3)}></use>
-                    </svg>
-                    <a href="#!" className={styles["nav__link"]}>
-                        <span>admin</span>
-                    </a>
-                </li>
-                <li className={styles["nav__item"]} onClick={handlePageChange(4, '/about')}>
-                    <svg className={styles["nav__icon"]}>
-                        <use xlinkHref={getIconUrl(state, 4)}></use>
+                        <use xlinkHref={getIconUrl('/about')}></use>
                     </svg>
                     <a href="#!" className={styles["nav__link"]}>
                         <span>about</span>

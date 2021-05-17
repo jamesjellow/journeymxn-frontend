@@ -1,0 +1,119 @@
+@import "../abstracts/functions";
+@import "../abstracts/mixins";
+@import "../abstracts/variables";
+
+@import "../base/typography";
+@import "../base/animations";
+
+.container {
+	width: 100%;
+	min-height: 100vh;
+	background-color: $primary-yellow;
+}
+
+.confirm {
+	font-family: 'DM Serif Text', 'Open Sans', sans-serif;
+
+	width: 100%;
+	height: 93vh;
+
+	background-image: url("/formSubmitted.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&__card {
+		width: 50rem;
+		height: 60rem;
+
+		background-color: $color-grey-light-1;
+
+		display: grid;
+		grid-template-rows: 1fr 2fr 2fr;
+		align-items: center;
+		justify-items: center;
+	}
+
+	&__title {
+		font-family: inherit;
+		font-size: 5.4rem;
+		color: $color-grey-dark-1;
+		letter-spacing: .7rem;
+		text-transform: uppercase;
+	}
+
+	&__icon-box {
+		width: 20rem;
+		height: 20rem;
+
+		background-color: $color-grey-dark-1;
+		border-radius: 50%;
+
+		position: relative;
+	}
+
+	&__icon {
+		width: 11rem;
+		height: 11rem;
+		fill: white;
+
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	&__message {
+		width: 100%;
+		height: 100%;
+		padding: 4rem 9rem;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: center;
+	}
+
+	&__message-text {
+		font-family: inherit;
+		font-size: 1.6rem;
+		color: $color-grey-dark-1;
+		letter-spacing: .1rem;
+	}
+
+	&__btn {
+		&,
+		&:link,
+		&:visited {
+			font-family: inherit;
+			font-size: 2rem;
+			text-decoration: none;
+			letter-spacing: 1px;
+
+			width: 20rem;
+			height: 4rem;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			border-radius: 4px;
+			margin-top: 4rem;
+
+			pointer-events: auto;
+			background-color: rgba($color-grey-dark-1, 1);
+			color: rgba($primary-yellow, 1);
+			border: 1px solid $color-grey-dark-1;
+			
+			@include respond('tab-port') {
+				font-size: 2.8rem;
+				width: 20rem;
+				height: 6rem;
+				border-radius: 8px;
+			}
+		}
+	}
+}

@@ -1,6 +1,8 @@
 import App from 'next/app'
 import Head from 'next/head'
+// import React, { useState, useEffect } from 'react';
 import { StateProvider } from '../components/context'
+import { StateManagement } from '../components/state'
 
 import '../styles/main.scss'
 
@@ -10,6 +12,9 @@ class MyApp extends App {
     return (
       <StateProvider>
         <Head>
+          <meta name="description" content="Take a quiz for career recommendation" />
+          <meta name="keywords" content="Journeymxn, Career, Recommendation, High School" />
+          <meta name="author" content="Justin Kang, Gabe de Mesa, Patrick Talledo Castillofuentes, Mugdhaa Patankar" />
           <meta name="viewport" content="width=device-width, initial-scale=0.41, maximum-scale=1" />
           <title>Journeymxn</title>
           <link rel="icon" href="/favicon.ico" />

@@ -1,72 +1,175 @@
 import Link from 'next/link'
+import {useEffect} from 'react'
 import {useState, useDispatchState} from '../components/context'
 
 import styles from '../styles/components/quiz_form.module.scss'
+import stateJSON from '../public/json/state.json'
+import { Router, useRouter } from 'next/router';
 
-function makeQuizzes(questions) {
-	questions.forEach((qna_pair, index) => {
-		let question = qna_pair["question"];
-		let answers = qna_pair["answers"];
-
-		let htmlDOM = 1;
-	});
-}
 
 export default function QuizForm() {
 	const state = useState();
   	const dispatch = useDispatchState();
+	const router = useRouter();
 
-	const questions = state.questions;
+	const handleInputChange = (index, career, skill, score) => {
+		// console.log(state.selections);
+	}
 
-	const handleInputChange = (index, industry, skill, score) => {
+	const checkInput = (inputId, career, skill, score) => {
 		return (event) => {
-			dispatch({type: "QUIZ-CHANGE", index: index, industry: industry, skill: skill, score: score});
+			event.preventDefault();
+			document.querySelector(`#${inputId}`).checked = true;
+			dispatch({type: "QUIZ-SELECT", career: career, skill: skill, score: score});
 		}
 	}
 
-	const checkInput = (inputId) => {
-		return (event) => {
-			event.preventDefault();
-			console.log('b:', document.querySelector(`#${inputId}`).checked);
-			document.querySelector(`#${inputId}`).checked = true;
-			console.log('a:', document.querySelector(`#${inputId}`).checked);
+	const submit = async (e) => {
+		e.preventDefault();
+		let stateName = document.querySelector("#state").value
+		let schoolDist = document.querySelector("#school-dist").value;
+		let schoolName = document.querySelector("#school").value;
+		let email = document.querySelector("#email").value;
+
+		let responses = [];
+		for (const [career, value] of Object.entries(state.selections)) {
+			for (const [skill, score] of Object.entries(value)) {
+				responses.push({"industry": career, "skill": skill, "score": score})
+			}
 		}
+
+		let submission = {
+			"emailto": email,
+			"state": stateName,
+			"school_district": schoolDist,
+			"school_name": schoolName,
+			"responses": responses
+		}
+
+		const url = 'https://journeymxn-api.herokuapp.com/submitForm';
+		const response = await fetch(url, {
+			method: "post",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body : JSON.stringify(submission)
+		});
+		// console.log(response);
+		if (response.status != 201) {
+			// Popup and say error submitting form
+			alert("We could not submit the form. Please try again.");
+		} else {
+			state.finished_form = true;
+			dispatch({type: "RESET"});
+			// redirect them to /formSumitted
+			router.push('/formSubmitted');
+		}
+		
+	};
+
+	
+
+	const onInvalidEmail = (e) => {
+		return e.target.setCustomValidity("Please type in your email correctly.");
+	};
+
+	const listStateOptions = () => {
+		let states = ['CA', 'AK', 'AL', 'AR', 'AS', 'AZ', 'BI', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'GU', 'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'VI', 'VT', 'WA', 'WI', 'WV', 'WY'];
+
+
+		return states.map((elm) => {return (<option value={elm}>{elm}</option>)})
+	}
+
+	const makeRadioInput = (id, isChecked, level) => {
+		if (isChecked) {
+			return (<input type="radio" name={`q${id}`} id={`q${id}-${level}`} className={styles["question__choice"]} checked />);
+		}
+		return (<input type="radio" name={`q${id}`} id={`q${id}-${level}`} className={styles["question__choice"]}/>);
+	}
+
+	const quizEnd = () => {
+		return (
+			<form className={styles["submit"]}>
+				<h4 className={styles["submit__title"]}>Almost Done!</h4>
+				<div className={styles["submit__submit-box"]}>
+					<h4 className={styles["submit__label"]}>Find Your State</h4>
+					<select className={styles["submit__dropdown"]} name="state" id="state">
+						{listStateOptions()}
+					</select>
+				</div>
+				<div className={styles["submit__submit-box"]}>
+					<h4 className={styles["submit__label"]}>Find your school district</h4>
+					<select className={styles["submit__dropdown"]} name="school-dist" id="school-dist">
+						<option value="Huntington Beach Union High">Huntington Beach Union High</option>
+					</select>
+				</div>
+				<div className={styles["submit__submit-box"]}>
+					<h4 className={styles["submit__label"]}>Find your school</h4>
+					<select className={styles["submit__dropdown"]} name="school" id="school">
+						<option value="Edison High">Edison High</option>
+						<option value="Fountain Valley High">Fountain Valley High</option>
+						<option value="Huntington Beach Adult School">Huntington Beach Adult School</option>
+						<option value="Huntington Beach High">Huntington Beach High</option>
+						<option value="Ocean View High">Ocean View High</option>
+						<option value="Marina High">Marina High</option>
+						<option value="Valley Vista High (Continuation)">Valley Vista High (Continuation)</option>
+						<option value="Westminster High School">Westminster High School</option>
+						<option value="Huntington Beach Adult School">Huntington Beach Adult School</option>
+						<option value="Coast High">Coast High</option>
+					</select>
+				</div>
+				<div className={styles["submit__submit-box"]}>
+					<label htmlFor="email" className={styles["submit__label"]}>Your Email</label>
+					<input type="email" id="email" onInvalid={onInvalidEmail} required className={styles["submit__input"]}></input>
+				</div>
+				
+				<button type="submit" className={styles["submit__submit-btn"]} onClick={submit}>Submit</button>
+			</form>
+			);
 	}
 
 	const makeQuestionHTML = (questions) => {
-		return questions.map((question, index) => {
-			return (
-				<div className={styles["question"]}>
-					<h4 className={styles["question__number"]}>{state.career_index * 5 + index + 1}.</h4>
-					<h4 className={styles["question__question"]}>{question.question}</h4>
-					<div className={styles["question__choice-container"]}>
-						<input type="radio" name={`q${index}`} id={`q${index}-high`} className={styles["question__choice"]} onChange={handleInputChange(state.career_index * 5 + index, question.career, question.skill, 1)}></input>
-						<div className={styles["question__label-container"]} onClick={checkInput(`q${index}-high`)} >
-							<label htmlFor={`q${index}-high`} className={styles["question__label"]}>{question.answers.high}</label>
+		if (state.quiz_done) {
+			return quizEnd();
+		} else {
+			return questions.map((question, index) => {
+				let page_id = state.career_index * 5
+				return (
+					<div className={styles["question"]} key={`question-${index + 1}`}>
+						<h4 className={styles["question__number"]}>{page_id + index + 1}.</h4>
+						<h4 className={styles["question__question"]}>{question.question}</h4>
+						<div className={styles["question__choice-container"]}>
+							{makeRadioInput(page_id + index, state.selections[question.career][question.skill] == 1, 'high')}
+							<div className={styles["question__label-container"]} onClick={checkInput(`q${page_id + index}-high`, question.career, question.skill, 1)} >
+								<label htmlFor={`q${page_id + index}-high`} className={styles["question__label"]} >{question.answers.high}</label>
+							</div>
+						</div>
+						<div className={styles["question__choice-container"]}>
+							{makeRadioInput(page_id + index, state.selections[question.career][question.skill] == 0, 'med')}
+							<div className={styles["question__label-container"]} onClick={checkInput(`q${page_id + index}-med`, question.career, question.skill, 0)}>
+								<label htmlFor={`q${page_id + index}-med`} className={styles["question__label"]}>{question.answers.medium}</label>
+							</div>
+						</div>
+						<div className={styles["question__choice-container"]}>
+							{makeRadioInput(page_id + index, state.selections[question.career][question.skill] == -1,'low')}
+							<div className={styles["question__label-container"]} onClick={checkInput(`q${page_id + index}-low`, question.career, question.skill, -1)}>
+								<label htmlFor={`q${page_id + index}-low`} className={styles["question__label"]}>{question.answers.low}</label>
+							</div>
 						</div>
 					</div>
-					<div className={styles["question__choice-container"]}>
-						<input type="radio" name={`q${index}`} id={`q${index}-med`} className={styles["question__choice"]} onChange={handleInputChange(state.career_index * 5 + index, question.career, question.skill, 0)}></input>
-						<div className={styles["question__label-container"]} onClick={checkInput(`q${index}-med`)}>
-							<label htmlFor={`q${index}-med`} className={styles["question__label"]}>{question.answers.medium}</label>
-						</div>
-					</div>
-					<div className={styles["question__choice-container"]}>
-						<input type="radio" name={`q${index}`} id={`q${index}-low`} className={styles["question__choice"]} onChange={handleInputChange(state.career_index * 5 + index, question.career, question.skill, -1)}></input>
-						<div className={styles["question__label-container"]} onClick={checkInput(`q${index}-low`)}>
-							<label htmlFor={`q${index}-low`} className={styles["question__label"]}>{question.answers.low}</label>
-						</div>
-					</div>
-				</div>
-			)
-		});
+				)
+			});
+		}
 	}
 
-	console.log(questions);
+	useEffect(() => {
+		dispatch({type: 'LOAD'})
+	}, []);
+
 	return (
 		<div className={styles["container"]}>
 			{makeQuestionHTML(state.current_questions)}
-
+			<img src="icon.svg" alt="icon" className={styles["question__icon"]}/>
       	</div>
 
 	);

@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
+import {useEffect} from 'react'
 
 import QuizForm from '../components/quiz_form'
 import {useState, useDispatchState} from '../components/context'
@@ -29,27 +30,46 @@ export default function Quiz() {
   const getBtnFunctionalityClass = (isPrev) => {
     if (state.career_index == 0 && isPrev)
       return styles["quiz-nav__btn--disabled"];
-    if (state.career_index == state.careers_length - 1 && !isPrev)
+    if (state.career_index == state.careers_length && !isPrev)
       return styles["quiz-nav__btn--disabled"];
     return styles["quiz-nav__btn--enabled"];
   }
 
-  async function submitForm() {
-    const url = 'https://journeymxn-api.herokuapp.com/submitForm';
-    const someJSON = { "Hello" : "World" };
-    const response = await fetch(url, {
-      method: "post",
-      headers: {
-           "Content-Type": "application/json"
-      },
-      body : JSON.stringify(someJSON)
-    })
-    // console.log(response);
-    if (response.status !== 201)
-      console.error("Could not submit form")
-    else
-      console.log(await response.text())
+  const onClickStart = (e) => {
+    e.preventDefault();
+    dispatch({type: 'QUIZ-START'});
   }
+
+  const quizStart = () => {
+    return (
+      <div className={styles["container"]}>
+        <div className={styles["quiz-start"]}>
+          <a href="#!" onClick={onClickStart} className={styles["quiz-start__btn"]}>start quiz</a>
+          <img src="icon.svg" alt="icon" className={styles["quiz-start__icon"]}/>
+        </div>
+      </div>
+    
+    );
+  }
+
+  const quiz = () => {
+    if (state.quiz_start)
+      return quizStart();
+    return (
+      <div className={styles["container"]}>
+        <QuizForm />
+        <div className={styles["quiz-nav"]}>
+          <a href="#!" className={`${styles["quiz-nav__btn"]} ${getBtnFunctionalityClass(true)}`} onClick={handlePrev}>previous</a>
+          <h4 className={styles["quiz-nav__page"]} id="quiz-page">{`${state.career_index + 1} / ${state.careers_length + 1}`}</h4>
+          <a href="#!" className={`${styles["quiz-nav__btn"]} ${getBtnFunctionalityClass(false)}`} onClick={handleNext}>next</a>
+        </div>
+      </div>
+    );
+  }
+
+  useEffect(() => {
+		dispatch({type: 'LOAD'})
+	}, []);
 
   return (
     <div className="container">
@@ -65,22 +85,10 @@ export default function Quiz() {
 
       <NavComponent />
       
-      <div className={styles["container"]}>
-        <QuizForm />
-        <div className={styles["quiz-nav"]}>
-          <a href="#!" className={`${styles["quiz-nav__btn"]} ${getBtnFunctionalityClass(true)}`} onClick={handlePrev}>previous</a>
-          <h4 className={styles["quiz-nav__page"]} id="quiz-page">{`${state.career_index + 1} / ${state.careers_length}`}</h4>
-          <a href="#!" className={`${styles["quiz-nav__btn"]} ${getBtnFunctionalityClass(false)}`} onClick={handleNext}>next</a>
-        </div>
-      </div>
+        {quiz()}
 
-      {/* <form action="#!" onSubmit={submitForm}>
-        <label name="name" htmlFor="inp1">What is your name?</label> 
-        <input type="text" id="inp1" />
-        <button type="submit" className={styles["submit-btn"]}>Submit</button>
-      </form> */}
-
-      
+      <script type="text/javascript" src="../public/js/quiz.js">
+      </script>
     </div>
   )
 }
