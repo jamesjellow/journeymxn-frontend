@@ -40,7 +40,7 @@ export default function About() {
             Meet the team!
           </div>
           <div className={styles["founder"]}>
-            <img src="/hai.jpg" alt="Photo of Hai"/>
+            <img src="/Hai.jpg" alt="Photo of Hai"/>
             <div>
               <h1>Hai Truong</h1>
               <h1>Founder</h1>  
@@ -49,22 +49,22 @@ export default function About() {
           </div>
           <div className={styles["developers"]}>
             <div className={styles["person"]}>
-              <img src="/justin.jpg" alt="Photo of Justin"/>
+              <img src="/Justin.jpg" alt="Photo of Justin"/>
               <h2>Justin Kang</h2>
               <h2>Front-end Developer</h2>
             </div>
             <div className={styles["person"]}>
-              <img src="/mugdha.jpg" alt="Photo of Mugdhaa"/>
+              <img src="/Mugdha.jpg" alt="Photo of Mugdhaa"/>
               <h2>Mugdhaa Patankar</h2>
               <h2>Back-end Developer</h2>
             </div>
             <div className={styles["person"]}>
-              <img src="/gabe.jpg" alt="Photo of Gabe"/>
+              <img src="/Gabe.jpg" alt="Photo of Gabe"/>
               <h2>Gabe De Mesa</h2>
               <h2>Back-end Developer</h2>
             </div>
             <div className={styles["person"]}>
-              <img src="/patrick.jpg" alt="Photo of Patrick"/>
+              <img src="/Patrick.jpg" alt="Photo of Patrick"/>
               <h2>Patrick Castillofuentes</h2>
               <h2>Front-end Developer</h2>
             </div>
