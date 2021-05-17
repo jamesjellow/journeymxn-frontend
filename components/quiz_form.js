@@ -32,7 +32,7 @@ export default function QuizForm() {
 		let schoolName = document.querySelector("#school").value;
 		let email = document.querySelector("#email").value.trim();
 
-		let regex = /\S+@\S+\.\S+/;
+		let regex = new RegExp('/\S+@\S+\.\S+/');
 
 		if (email == "" || email == undefined) {
 			document.querySelector("#email").setAttribute("isvalid", "true");
