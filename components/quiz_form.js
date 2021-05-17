@@ -26,44 +26,57 @@ export default function QuizForm() {
 
 	const submit = async (e) => {
 		e.preventDefault();
+
 		let stateName = document.querySelector("#state").value
 		let schoolDist = document.querySelector("#school-dist").value;
 		let schoolName = document.querySelector("#school").value;
-		let email = document.querySelector("#email").value;
+		let email = document.querySelector("#email").value.trim();
 
-		let responses = [];
-		for (const [career, value] of Object.entries(state.selections)) {
-			for (const [skill, score] of Object.entries(value)) {
-				responses.push({"industry": career, "skill": skill, "score": score})
+		let regex = /\S+@\S+\.\S+/;
+
+		if (email == "" || email == undefined) {
+			document.querySelector("#email").setAttribute("isvalid", "true");
+			alert("You need to type in your email.");
+		} else if (regex.test(email)) {
+			document.querySelector("#email").setAttribute("isvalid", "true");
+			alert("Please type in a valid email address.");
+		} else {
+			let responses = [];
+			for (const [career, value] of Object.entries(state.selections)) {
+				for (const [skill, score] of Object.entries(value)) {
+					responses.push({"industry": career, "skill": skill, "score": score})
+				}
+			}
+
+			let submission = {
+				"emailto": email,
+				"state": stateName,
+				"school_district": schoolDist,
+				"school_name": schoolName,
+				"responses": responses
+			}
+
+			const url = 'https://journeymxn-api.herokuapp.com/submitForm';
+			const response = await fetch(url, {
+				method: "post",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body : JSON.stringify(submission)
+			});
+			// console.log(response);
+			if (response.status != 201) {
+				// Popup and say error submitting form
+				alert("We could not submit the form. Please try again.");
+			} else {
+				state.finished_form = true;
+				dispatch({type: "RESET"});
+				// redirect them to /formSumitted
+				router.push('/formSubmitted');
 			}
 		}
 
-		let submission = {
-			"emailto": email,
-			"state": stateName,
-			"school_district": schoolDist,
-			"school_name": schoolName,
-			"responses": responses
-		}
-
-		const url = 'https://journeymxn-api.herokuapp.com/submitForm';
-		const response = await fetch(url, {
-			method: "post",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body : JSON.stringify(submission)
-		});
-		// console.log(response);
-		if (response.status != 201) {
-			// Popup and say error submitting form
-			alert("We could not submit the form. Please try again.");
-		} else {
-			state.finished_form = true;
-			dispatch({type: "RESET"});
-			// redirect them to /formSumitted
-			router.push('/formSubmitted');
-		}
+		
 		
 	};
 
@@ -120,7 +133,7 @@ export default function QuizForm() {
 				</div>
 				<div className={styles["submit__submit-box"]}>
 					<label htmlFor="email" className={styles["submit__label"]}>Your Email</label>
-					<input type="email" id="email" onInvalid={onInvalidEmail} required className={styles["submit__input"]}></input>
+					<input type="email" id="email" onInvalid={onInvalidEmail} className={styles["submit__input"]}></input>
 				</div>
 				
 				<button type="submit" className={styles["submit__submit-btn"]} onClick={submit}>Submit</button>
