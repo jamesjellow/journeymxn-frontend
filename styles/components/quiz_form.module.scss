@@ -9,6 +9,7 @@
 	overflow: visible;
 	top:0px;
 	left:0px;
+	position: relative;
 
 	background-color: rgba($primary-yellow, 1);
 }
@@ -22,6 +23,8 @@
 
 	color: $color-grey-dark-1;
 	margin-top: 3rem;
+
+	z-index: 3;
 
 	&__number {
 		width: 100%;
@@ -47,12 +50,14 @@
 		overflow-wrap: anywhere;
 
 		margin-bottom: 2rem;
+		z-index: 3;
 	}
 
 	&__choice-container {
 		margin-top: .4rem;
 		width: 100%;
 		grid-column: 1 / span 2;
+		z-index: 3;
 	}
 
 	&__choice {
@@ -105,6 +110,15 @@
 	&:not(:last-child) {
 		margin-bottom: 2rem;
 	}
+
+	&__icon {
+		width: 90%;
+
+		position: absolute;
+		right: -45%;
+		top: -5%;
+		z-index: 1;
+	}
 }
 
 .form {
@@ -123,7 +137,7 @@
 	justify-content: space-around;
 }
 
-.quiz {
+.submit {
 	&__submit-btn {
 		text-transform: uppercase;
         text-decoration: none;

@@ -12,8 +12,6 @@ export default function QuizForm() {
   	const dispatch = useDispatchState();
 	const router = useRouter();
 
-	const questions = state.questions;
-
 	const handleInputChange = (index, career, skill, score) => {
 		// console.log(state.selections);
 	}
@@ -21,10 +19,8 @@ export default function QuizForm() {
 	const checkInput = (inputId, career, skill, score) => {
 		return (event) => {
 			event.preventDefault();
-			console.log(state.selections);
 			document.querySelector(`#${inputId}`).checked = true;
 			dispatch({type: "QUIZ-SELECT", career: career, skill: skill, score: score});
-			console.log('a:', document.querySelector(`#${inputId}`).checked);
 		}
 	}
 
@@ -34,9 +30,6 @@ export default function QuizForm() {
 		let schoolDist = document.querySelector("#school-dist").value;
 		let schoolName = document.querySelector("#school").value;
 		let email = document.querySelector("#email").value;
-
-		console.log(stateName);
-		console.log(email);
 
 		let responses = [];
 		for (const [career, value] of Object.entries(state.selections)) {
@@ -53,8 +46,6 @@ export default function QuizForm() {
 			"responses": responses
 		}
 
-		console.log("success", submission);
-
 		const url = 'https://journeymxn-api.herokuapp.com/submitForm';
 		const response = await fetch(url, {
 			method: "post",
@@ -65,14 +56,13 @@ export default function QuizForm() {
 		});
 		// console.log(response);
 		if (response.status != 201) {
-			console.error("Could not submit form")
 			// Popup and say error submitting form
 			alert("We could not submit the form. Please try again.");
 		} else {
-			console.log(await response.text());
 			state.finished_form = true;
+			dispatch({type: "RESET"});
 			// redirect them to /formSumitted
-			router.push('/formSubmitted')
+			router.push('/formSubmitted');
 		}
 		
 	};
@@ -88,6 +78,13 @@ export default function QuizForm() {
 
 
 		return states.map((elm) => {return (<option value={elm}>{elm}</option>)})
+	}
+
+	const makeRadioInput = (id, isChecked, level) => {
+		if (isChecked) {
+			return (<input type="radio" name={`q${id}`} id={`q${id}-${level}`} className={styles["question__choice"]} checked />);
+		}
+		return (<input type="radio" name={`q${id}`} id={`q${id}-${level}`} className={styles["question__choice"]}/>);
 	}
 
 	const quizEnd = () => {
@@ -127,34 +124,34 @@ export default function QuizForm() {
 				</div>
 				
 				<button type="submit" className={styles["submit__submit-btn"]} onClick={submit}>Submit</button>
-
-				<img src="icon.svg" alt="icon" className={styles["submit__icon"]}/>
 			</form>
 			);
 	}
 
 	const makeQuestionHTML = (questions) => {
-		if (!state.quiz_done) {
+		if (state.quiz_done) {
+			return quizEnd();
+		} else {
 			return questions.map((question, index) => {
 				let page_id = state.career_index * 5
 				return (
-					<div className={styles["question"]}>
+					<div className={styles["question"]} key={`question-${index + 1}`}>
 						<h4 className={styles["question__number"]}>{page_id + index + 1}.</h4>
 						<h4 className={styles["question__question"]}>{question.question}</h4>
 						<div className={styles["question__choice-container"]}>
-							<input type="radio" name={`q${page_id + index}`} id={`q${page_id + index}-high`} className={styles["question__choice"]} onChange={handleInputChange(page_id + index, question.career, question.skill, 1)} checked={state.selections[question.career][question.skill] == 1}></input>
+							{makeRadioInput(page_id + index, state.selections[question.career][question.skill] == 1, 'high')}
 							<div className={styles["question__label-container"]} onClick={checkInput(`q${page_id + index}-high`, question.career, question.skill, 1)} >
 								<label htmlFor={`q${page_id + index}-high`} className={styles["question__label"]} >{question.answers.high}</label>
 							</div>
 						</div>
 						<div className={styles["question__choice-container"]}>
-							<input type="radio" name={`q${page_id + index}`} id={`q${page_id + index}-med`} className={styles["question__choice"]} onChange={handleInputChange(page_id + index, question.career, question.skill, 0)} checked={state.selections[question.career][question.skill] == 0}></input>
+							{makeRadioInput(page_id + index, state.selections[question.career][question.skill] == 0, 'med')}
 							<div className={styles["question__label-container"]} onClick={checkInput(`q${page_id + index}-med`, question.career, question.skill, 0)}>
 								<label htmlFor={`q${page_id + index}-med`} className={styles["question__label"]}>{question.answers.medium}</label>
 							</div>
 						</div>
 						<div className={styles["question__choice-container"]}>
-							<input type="radio" name={`q${page_id + index}`} id={`q${page_id + index}-low`} className={styles["question__choice"]} onChange={handleInputChange(page_id + index, question.career, question.skill, -1)} checked={state.selections[question.career][question.skill] == -1}></input>
+							{makeRadioInput(page_id + index, state.selections[question.career][question.skill] == -1,'low')}
 							<div className={styles["question__label-container"]} onClick={checkInput(`q${page_id + index}-low`, question.career, question.skill, -1)}>
 								<label htmlFor={`q${page_id + index}-low`} className={styles["question__label"]}>{question.answers.low}</label>
 							</div>
@@ -162,19 +159,17 @@ export default function QuizForm() {
 					</div>
 				)
 			});
-		} else {
-			return quizEnd();
-		}	
+		}
 	}
 
 	useEffect(() => {
 		dispatch({type: 'LOAD'})
 	}, []);
-	
+
 	return (
 		<div className={styles["container"]}>
 			{makeQuestionHTML(state.current_questions)}
-
+			<img src="icon.svg" alt="icon" className={styles["question__icon"]}/>
       	</div>
 
 	);

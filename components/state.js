@@ -5,7 +5,6 @@ const StateManagement = () => {
 	const [userData, setUserData] = useState();
 	useEffect(() => {
 		setUserData(localStorage.getItem('userData'));
-		console.log()
 	}, [sessionStorage.getItem('userData')]);
 
 	return (
