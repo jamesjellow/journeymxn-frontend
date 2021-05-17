@@ -42,9 +42,15 @@ export default function QuizForm() {
 			alert("Please type in a valid email address.");
 		} else {
 			let responses = [];
+			let index = 1;
 			for (const [career, value] of Object.entries(state.selections)) {
 				for (const [skill, score] of Object.entries(value)) {
 					responses.push({"industry": career, "skill": skill, "score": score})
+					if (score == null) {
+						alert(`You have not answered a question number ${index}. Please answer all the questions before you submit.`)
+						return;
+					}
+					index += 1
 				}
 			}
 
