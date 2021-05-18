@@ -85,6 +85,7 @@ const reducer = (state, action) => {
 			initial_state["is_login"] = false;
 			initial_state["quiz_start"] = true;
 			initial_state["quiz_done"] = false;
+			initial_state["loading"] = false;
 
 			let current_career = "";
 			quiz.forEach((entry) => {
@@ -107,7 +108,16 @@ const reducer = (state, action) => {
 			state = initial_state;
 			sessionStorage.setItem('state', JSON.stringify(state));
 			return state;
-
+		case 'QUIZ-LOAD-START':
+			state.loading = true;
+			window.sessionStorage.setItem('state', JSON.stringify(state))
+			state = Object.assign({}, state);
+			return state;
+		case 'QUIZ-LOAD-DONE':
+			state.loading = false;
+			window.sessionStorage.setItem('state', JSON.stringify(state))
+			state = Object.assign({}, state);
+			return state;
 		default:
 			throw new Error(`Unknown Action: ${action.type}`);
 	}
@@ -128,6 +138,7 @@ export const StateProvider = ({ children }) => {
 	initial_state["is_login"] = false;
 	initial_state["quiz_start"] = true;
 	initial_state["quiz_done"] = false;
+	initial_state["loading"] = false;
 
 	let current_career = "";
 	quiz.forEach((entry) => {
@@ -148,10 +159,6 @@ export const StateProvider = ({ children }) => {
 	initial_state["careers_length"] = initial_state["careers"].length;
 
 	const [state, dispatch] = useReducer(reducer, initial_state);
-
-	useEffect(() => {
-		dispatch({type: 'LOAD'})
-	}, []);
 
 	return (
 		<StateDispatchContext.Provider value={dispatch}>

@@ -46,10 +46,10 @@ export default function QuizForm() {
 			for (const [career, value] of Object.entries(state.selections)) {
 				for (const [skill, score] of Object.entries(value)) {
 					responses.push({"industry": career, "skill": skill, "score": score})
-					if (score == null) {
-						alert(`Please answer all the questions before you submit.\nMissing Question: #${index}`)
-						return;
-					}
+					// if (score == null) {
+					// 	alert(`Please answer all the questions before you submit.\nMissing Question: #${index}`)
+					// 	return;
+					// }
 					index += 1
 				}
 			}
@@ -62,6 +62,8 @@ export default function QuizForm() {
 				"responses": responses
 			}
 
+			dispatch({type: "QUIZ-LOAD-START"});
+
 			const url = 'https://journeymxn-api.herokuapp.com/submitForm';
 			const response = await fetch(url, {
 				method: "post",
@@ -70,16 +72,19 @@ export default function QuizForm() {
 				},
 				body : JSON.stringify(submission)
 			});
+
 			// console.log(response);
 			if (response.status != 201) {
 				// Popup and say error submitting form
+				dispatch({type: "QUIZ-LOAD-DONE"});
 				alert("We could not submit the form. Please try again.");
 			} else {
 				state.finished_form = true;
 				dispatch({type: "RESET"});
 				// redirect them to /formSumitted
-				router.push('/formSubmitted');
+				router.push('/formSubmitted');dispatch({type: "QUIZ-LOAD-DONE"});
 			}
+			
 		}
 
 		
@@ -141,7 +146,6 @@ export default function QuizForm() {
 					<label htmlFor="email" className={styles["submit__label"]}>Your Email</label>
 					<input type="email" id="email" onInvalid={onInvalidEmail} className={styles["submit__input"]}></input>
 				</div>
-				
 				<button type="submit" className={styles["submit__submit-btn"]} onClick={submit}>Submit</button>
 				<img src="icon.svg" alt="icon" id="bg-icon" className={styles["submit__icon"]}/>
 			</form>

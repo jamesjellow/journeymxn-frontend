@@ -53,8 +53,19 @@ export default function Quiz() {
   }
 
   const quiz = () => {
-    if (state.quiz_start)
+    if (state.loading) {
+			return (
+        <div className={styles["container"]}>
+          <div className={styles["loading"]}>
+            <div className={styles["loading__spinner"]}></div>
+          </div>
+        </div>
+			);
+		} 
+    if (state.quiz_start) {
       return quizStart();
+    }
+      
     return (
       <div className={styles["container"]}>
         <QuizForm />
@@ -84,8 +95,8 @@ export default function Quiz() {
       </Head>
 
       <NavComponent />
-      
-        {quiz()}
+      {quiz()}
+        
 
       <script type="text/javascript" src="../public/js/quiz.js">
       </script>
