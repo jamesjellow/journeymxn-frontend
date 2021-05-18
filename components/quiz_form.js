@@ -47,7 +47,7 @@ export default function QuizForm() {
 				for (const [skill, score] of Object.entries(value)) {
 					responses.push({"industry": career, "skill": skill, "score": score})
 					if (score == null) {
-						alert(`You have not answered a question number ${index}. Please answer all the questions before you submit.`)
+						alert(`Please answer all the questions before you submit.\nMissing Question: #${index}`)
 						return;
 					}
 					index += 1
