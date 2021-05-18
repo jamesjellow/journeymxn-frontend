@@ -47,7 +47,7 @@ export default function QuizForm() {
 				for (const [skill, score] of Object.entries(value)) {
 					responses.push({"industry": career, "skill": skill, "score": score})
 					if (score == null) {
-						alert(`You have not answered a question number ${index}. Please answer all the questions before you submit.`)
+						alert(`Please answer all the questions before you submit.\nMissing Question: #${index}`)
 						return;
 					}
 					index += 1
@@ -143,7 +143,9 @@ export default function QuizForm() {
 				</div>
 				
 				<button type="submit" className={styles["submit__submit-btn"]} onClick={submit}>Submit</button>
+				<img src="icon.svg" alt="icon" id="bg-icon" className={styles["submit__icon"]}/>
 			</form>
+			
 			);
 	}
 
@@ -151,7 +153,7 @@ export default function QuizForm() {
 		if (state.quiz_done) {
 			return quizEnd();
 		} else {
-			return questions.map((question, index) => {
+			let result = questions.map((question, index) => {
 				let page_id = state.career_index * 5
 				return (
 					<div className={styles["question"]} key={`question-${index + 1}`}>
@@ -178,6 +180,9 @@ export default function QuizForm() {
 					</div>
 				)
 			});
+
+			result.push((<img src="icon.svg" alt="icon" id="bg-icon" className={styles["question__icon"]}/>));
+			return result;
 		}
 	}
 
@@ -188,7 +193,6 @@ export default function QuizForm() {
 	return (
 		<div className={styles["container"]}>
 			{makeQuestionHTML(state.current_questions)}
-			<img src="icon.svg" alt="icon" className={styles["question__icon"]}/>
       	</div>
 
 	);
