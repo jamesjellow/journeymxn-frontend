@@ -28,16 +28,17 @@ export default function Admin() {
     )
   }
 
-  function renderCharts() {
-    const sdk = new EmbedSDK({
-        baseUrl: 'https://charts.mongodb.com/charts-data-analytics-platform-gqxba'
-    })
-    
-    const submissions = sdk.createChart({chartId: '93db39e7-506c-4fd4-a9ca-1fe5448217c8', width: 600, height: 400})
-    const countBySchool = sdk.createChart({chartId: '38226042-9d91-488c-b999-c9174c66c671', width: 800, height: 400})
-    const recByIndustry = sdk.createChart({chartId: '17f9410e-9387-4684-858a-71f6d8a56b6d', width: 800, height: 400})
-    const recBySchool = sdk.createChart({chartId: 'd007be5e-ab94-4856-a659-96ff50ad812d', width: 600, height: 400})
+  const sdk = new EmbedSDK({
+    baseUrl: 'https://charts.mongodb.com/charts-data-analytics-platform-gqxba'
+  })
 
+  const submissions = sdk.createChart({chartId: '93db39e7-506c-4fd4-a9ca-1fe5448217c8', width: 600, height: 400})
+  const countBySchool = sdk.createChart({chartId: '38226042-9d91-488c-b999-c9174c66c671', width: 800, height: 400})
+  const recByIndustry = sdk.createChart({chartId: '17f9410e-9387-4684-858a-71f6d8a56b6d', width: 800, height: 400})
+  const recBySchool = sdk.createChart({chartId: 'd007be5e-ab94-4856-a659-96ff50ad812d', width: 600, height: 400})
+
+
+  function renderCharts() {
     submissions.render(document.getElementById('submissions'))
     countBySchool.render(document.getElementById('countBySchool'))
     recByIndustry.render(document.getElementById('recByIndustry'))
