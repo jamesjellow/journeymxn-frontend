@@ -16,7 +16,6 @@ export default function Admin() {
   const recByIndustry = sdk.createChart({chartId: '17f9410e-9387-4684-858a-71f6d8a56b6d', width: 800, height: 400})
   const recBySchool = sdk.createChart({chartId: 'd007be5e-ab94-4856-a659-96ff50ad812d', width: 600, height: 400})
 
-
   function renderCharts() {
     submissions.render(document.getElementById('submissions'))
     countBySchool.render(document.getElementById('countBySchool'))
