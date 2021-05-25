@@ -15,17 +15,35 @@ export default function Admin() {
   const countBySchool = sdk.createChart({chartId: '38226042-9d91-488c-b999-c9174c66c671', width: 800, height: 400})
   const recByIndustry = sdk.createChart({chartId: '17f9410e-9387-4684-858a-71f6d8a56b6d', width: 800, height: 400})
   const recBySchool = sdk.createChart({chartId: 'd007be5e-ab94-4856-a659-96ff50ad812d', width: 600, height: 400})
+  const topSkills = sdk.createChart({chartId: '83caba7d-6f88-444f-896f-bc95ae885e72', width: 600, height: 400})
+  const avgScoreSkills = sdk.createChart({chartId: 'c490d63f-4716-4d33-84b1-06f3b68dcfc8', width: 600, height: 400})
 
   function renderCharts() {
     submissions.render(document.getElementById('submissions'))
     countBySchool.render(document.getElementById('countBySchool'))
     recByIndustry.render(document.getElementById('recByIndustry'))
     recBySchool.render(document.getElementById('recBySchool'))
+    topSkills.render(document.getElementById('topSkills'))
+    avgScoreSkills.render(document.getElementById('avgScoreSkills'))
   }
+  
 
   function filterCharts(value) {
-    submissions.setFilter({school_name: (value)})
-    recByIndustry.setFilter({school_name: (value)})
+    submissions.setFilter({school_name: value})
+    countBySchool.setFilter({school_name: value})
+    recByIndustry.setFilter({school_name: value})
+    recBySchool.setFilter({'school_name': value})
+    topSkills.setFilter({ 'form_response.school_name': value})
+    avgScoreSkills.setFilter({ 'form_response.school_name': value})
+  }
+
+  function clearFilter(){
+    submissions.setFilter({})
+    countBySchool.setFilter({})
+    recByIndustry.setFilter({})
+    recBySchool.setFilter({})
+    topSkills.setFilter({})
+    avgScoreSkills.setFilter({})
   }
 
   useEffect(()=> {
@@ -49,7 +67,7 @@ export default function Admin() {
         <h1>Filter By: </h1>
         <div className={styles["nav"]}>
           <select name="school" id="school" className={styles["dropdown"]}>
-            <option value="Select School" defaultValue hidden>Select School</option>
+            <option value="All Schools" defaultValue>All Schools</option>
             <option value="Edison High">Edison High School</option>
             <option value="Fountain Valley High">Fountain Valley High School</option>
             <option value="Huntington Beach High">Huntington Beach High School</option>
@@ -60,22 +78,28 @@ export default function Admin() {
             <option value="Huntington Beach Adult School">Huntington Beach Adult School</option>
             <option value="Coast High">Coast High School</option>
           </select>
-          <button onClick={
+        </div>
+        <button className={styles["button"]}onClick={
             () => {
               const name = document.getElementById('school').value
               console.log()
-              if(name){
+              if(name=="All Schools"){
+                clearFilter()
+              }
+              else if(name)
+              {
                 filterCharts(name)
               }
             }
-          }>Click</button>
-        </div>
+          }>Filter</button>
       </section>        
       <section className={styles["dash"]}>
             <div className={styles["chart"]} id="submissions"></div>
             <div className={styles["chart"]} id="countBySchool"></div>
             <div className={styles["chart"]} id="recByIndustry"></div>
             <div className={styles["chart"]} id="recBySchool"></div>
+            <div className={styles["chart"]} id="topSkills"></div>
+            <div className={styles["chart"]} id="avgScoreSkills"></div>
       </section>
 
     </div>
