@@ -10,7 +10,7 @@ import styles from '../styles/pages/login.module.scss'
 
 export default function Login() {
 
-  state = useState();
+  const state = useState();
 
   const submit = async (e) => {
 
@@ -25,21 +25,25 @@ export default function Login() {
     }
 
     const url = 'https://journeymxn-api.herokuapp.com/login';
-    const res = await fetch(url, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(submisison)
-    })
+    
+    try {
+        const res = await fetch(url, {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(submisison)
+        })
 
-    console.log(res)
+        console.log(res)
 
-    if(res.status == 200) {
-      window.location.href = "/admin"
+        if(res.status == 200) {
+          window.location.href = "/admin"
+        }
+    } catch (e) {
+      console.log(e)
     }
-
-  }
+  } 
 
   return (
     <div className={styles["container"]}>
@@ -53,13 +57,13 @@ export default function Login() {
             <img src="/icon-256.png" alt="journeymxn-logo" className={styles["icon-logo"]}/>
             <h1>journeymxn</h1>
         </div>
-        <form action="POST" className={styles["card"]}>
+        <form action="POST" className={styles["card"]} onSubmit={submit}>
             <h1 className={styles["title"]}>Login</h1>
 
             <div className={styles["input_pair"]}>
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
               <path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM7.07 18.28c.43-.9 3.05-1.78 4.93-1.78s4.51.88 4.93 1.78C15.57 19.36 13.86 20 12 20s-3.57-.64-4.93-1.72zm11.29-1.45c-1.43-1.74-4.9-2.33-6.36-2.33s-4.93.59-6.36 2.33C4.62 15.49 4 13.82 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8c0 1.82-.62 3.49-1.64 4.83zM12 6c-1.94 0-3.5 1.56-3.5 3.5S10.06 13 12 13s3.5-1.56 3.5-3.5S13.94 6 12 6zm0 5c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11z"/></svg>
-              <input id="email" type="text" placeholder="Enter Username" name="uname" required className={styles["userInput"]}/>
+              <input id="email" type="email" placeholder="Enter Email" name="uname" required className={styles["userInput"]}/>
             </div>
 
             <div className={styles["input_pair"]}>
@@ -68,7 +72,7 @@ export default function Login() {
               <input id="pass" type="password" placeholder="Enter Password" name="pass" required className={styles["passInput"]}/>
             </div>
 
-            <button type="submit" className={styles["submit"]} onClick={submit}>Login</button>
+            <button type="submit" className={styles["submit"]} >Login</button>
         </form>
     </div>
   )
