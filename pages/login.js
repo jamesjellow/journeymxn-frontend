@@ -4,13 +4,14 @@ import Link from 'next/link'
 import axios from "axios"
 
 import {useEffect} from 'react'
-import {useState} from '../components/context'
+import {useState,useDispatchState} from '../components/context'
 
 import styles from '../styles/pages/login.module.scss'
 
 export default function Login() {
 
   const state = useState();
+  const dispatch = useDispatchState();
 
   const submit = async (e) => {
 
@@ -36,10 +37,15 @@ export default function Login() {
         })
 
         console.log(res)
-
+        
         if(res.status == 200) {
           window.location.href = "/admin"
+          dispatch({type: LOGIN})
         }
+        else if (res.status == 401) {
+          document.getElementById("incorrect").innerHTML("*Incorrect Login")
+          window.location.href = "/login"
+        } 
     } catch (e) {
       console.log(e)
     }
@@ -53,6 +59,8 @@ export default function Login() {
         <title>Journeymxn</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+        <h1 id="incorrect" className={styles["incorrect"]}></h1>
         <div className={styles["logo"]}>
             <img src="/icon-256.png" alt="journeymxn-logo" className={styles["icon-logo"]}/>
             <h1>journeymxn</h1>
@@ -72,7 +80,7 @@ export default function Login() {
               <input id="pass" type="password" placeholder="Enter Password" name="pass" required className={styles["passInput"]}/>
             </div>
 
-            <button type="submit" className={styles["submit"]} >Login</button>
+            <button type="submit" className={styles["submit"]} onClick={submit}>Login</button>
         </form>
     </div>
   )

@@ -1,16 +1,62 @@
 import Head from 'next/head'
 
-import {useState, useEffect} from 'react'
+import {useEffect} from 'react'
+import {useState} from '../components/context'
 import EmbedSDK from '@mongodb-js/charts-embed-dom'
 
 import styles from '../styles/pages/admin.module.scss'
 
 export default function Admin() {
 
+  const state = useState()
+
+  //IF NOT LOGGED IN REDIRECT
+  if(!state.is_login)
+  {
+    const changePage = useEffect(() => { window.location.href = '/login'; });
+    changePage
+    return (
+      <div className={styles["redirect"]}>
+          <div className={styles["logo"]}>
+              <img src="/icon-256.png" alt="journeymxn-logo" className={styles["icon-logo"]}/>
+              <h1>journeymxn</h1>
+              <h1>Redirecting...</h1>
+          </div>
+      </div>
+    )
+  }
+
+  const checkJWT = async () => {
+    const url = 'https://journeymxn-api.herokuapp.com/login';
+    try {
+        const res = await fetch(url, {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            "Autherization": `Bearer ${/*Token*/}`
+          },
+          body: JSON.stringify(submisison)
+        })
+
+        console.log(res)
+
+        if(res.status == 200) {
+          window.location.href = "/admin"
+        }
+        else if(res.status == 401){
+          window.location.href = "/login"
+        } 
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  //SET UP LINK TO ACCESS CHARTS
   const sdk = new EmbedSDK({
     baseUrl: 'https://charts.mongodb.com/charts-data-analytics-platform-gqxba'
   })
 
+  //CREATE CHARTS
   const submissions = sdk.createChart({chartId: '93db39e7-506c-4fd4-a9ca-1fe5448217c8', width: 600, height: 400})
   const countBySchool = sdk.createChart({chartId: '38226042-9d91-488c-b999-c9174c66c671', width: 800, height: 400})
   const recByIndustry = sdk.createChart({chartId: '17f9410e-9387-4684-858a-71f6d8a56b6d', width: 800, height: 400})
@@ -26,7 +72,6 @@ export default function Admin() {
     topSkills.render(document.getElementById('topSkills'))
     avgScoreSkills.render(document.getElementById('avgScoreSkills'))
   }
-  
 
   function filterCharts(value) {
     submissions.setFilter({school_name: value})
@@ -46,6 +91,7 @@ export default function Admin() {
     avgScoreSkills.setFilter({})
   }
 
+  //RENDER INITIAL CHARTS
   useEffect(()=> {
     renderCharts()
   }, [])

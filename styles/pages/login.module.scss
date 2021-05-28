@@ -89,4 +89,10 @@
     font-weight: 100;
 }
 
-
+.redirect {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $primary-yellow;
+    height: 100vh;
+}
