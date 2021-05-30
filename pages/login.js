@@ -1,9 +1,4 @@
 import Head from 'next/head'
-import dynamic from 'next/dynamic'
-import Link from 'next/link'
-import axios from "axios"
-
-import {useEffect} from 'react'
 import {useState,useDispatchState} from '../components/context'
 
 import styles from '../styles/pages/login.module.scss'
@@ -14,9 +9,9 @@ export default function Login() {
   const dispatch = useDispatchState();
 
   const submit = async (e) => {
-
-    e.preventDefault()
     
+    document.getElementById("incorrect").innerHTML = ""
+
     let email = document.querySelector("#email").value
     let password = document.querySelector("#pass").value
 
@@ -35,16 +30,13 @@ export default function Login() {
           },
           body: JSON.stringify(submisison)
         })
-
-        console.log(res)
         
         if(res.status == 200) {
           window.location.href = "/admin"
           dispatch({type: LOGIN})
         }
         else if (res.status == 401) {
-          document.getElementById("incorrect").innerHTML("*Incorrect Login")
-          window.location.href = "/login"
+          document.getElementById("incorrect").innerHTML = "*The login credentials you have entered are invalid."
         } 
     } catch (e) {
       console.log(e)
