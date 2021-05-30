@@ -12,6 +12,10 @@ export default function Login() {
     
     document.getElementById("incorrect").innerHTML = ""
 
+    //SWAP LOADING ANIMATIONS
+    document.getElementById("logo").style.display = "none"
+    document.getElementById("loading").style.display = "flex"
+
     let email = document.querySelector("#email").value
     let password = document.querySelector("#pass").value
 
@@ -21,7 +25,7 @@ export default function Login() {
     }
 
     const url = 'https://journeymxn-api.herokuapp.com/login';
-    
+
     try {
         const res = await fetch(url, {
           method: "post",
@@ -41,6 +45,10 @@ export default function Login() {
     } catch (e) {
       console.log(e)
     }
+
+    //RETURN TO ORIGINAL LOGO
+    document.getElementById("logo").style.display = "flex"
+    document.getElementById("loading").style.display = "none"
   } 
 
   return (
@@ -52,10 +60,15 @@ export default function Login() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-        <h1 id="incorrect" className={styles["incorrect"]}></h1>
-        <div className={styles["logo"]}>
+        <h1 id="incorrect" className={styles["incorrect"]}></h1> 
+
+        <div className={styles["logo"]} id="logo">
             <img src="/icon-256.png" alt="journeymxn-logo" className={styles["icon-logo"]}/>
             <h1>journeymxn</h1>
+        </div>
+        <div className={styles["loading"]} style={{display: "none"}}  id="loading">
+          <img src="/icon-256.png" alt="journeymxn-logo" className={styles["rotation"]}/>
+          <h1>loading...</h1>
         </div>
         <form action="POST" className={styles["card"]} onSubmit={submit}>
             <h1 className={styles["title"]}>Login</h1>
