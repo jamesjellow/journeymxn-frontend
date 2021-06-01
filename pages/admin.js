@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
 import {useEffect} from 'react'
-import {useState} from '../components/context'
+import {useState, useDispatchState} from '../components/context'
 import EmbedSDK from '@mongodb-js/charts-embed-dom'
 
 import styles from '../styles/pages/admin.module.scss'
@@ -9,47 +9,7 @@ import styles from '../styles/pages/admin.module.scss'
 export default function Admin() {
 
   const state = useState()
-
-  //IF NOT LOGGED IN REDIRECT
-  if(!state.is_login)
-  {
-    const changePage = useEffect(() => { window.location.href = '/login'; });
-    changePage
-    return (
-      <div className={styles["redirect"]}>
-          <div className={styles["logo"]}>
-              <img src="/icon-256.png" alt="journeymxn-logo" className={styles["icon-logo"]}/>
-              <h1>journeymxn</h1>
-              <h1>Redirecting...</h1>
-          </div>
-      </div>
-    )
-  }
-
-  const checkJWT = async () => {
-    const url = 'https://journeymxn-api.herokuapp.com/login';
-    try {
-        const res = await fetch(url, {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            "Autherization": `Bearer ${/*Token*/}`
-          },
-          body: JSON.stringify(submisison)
-        })
-
-        console.log(res)
-
-        if(res.status == 200) {
-          window.location.href = "/admin"
-        }
-        else if(res.status == 401){
-          window.location.href = "/login"
-        } 
-    } catch (e) {
-      console.log(e)
-    }
-  }
+  const dispatch = useDispatchState();
 
   //SET UP LINK TO ACCESS CHARTS
   const sdk = new EmbedSDK({
@@ -91,23 +51,54 @@ export default function Admin() {
     avgScoreSkills.setFilter({})
   }
 
+  const checkJWT = async () => {
+    const url = 'https://journeymxn-api.herokuapp.com/admin';
+    try {
+        const res = await fetch(url, {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+          }
+        })
+
+        if(res.status == 200) {
+          renderCharts()
+        }
+        else {
+          window.location.href = "/login"
+        }
+
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const logOut = () => {
+    localStorage.removeItem('token')
+    dispatch({type: "LOGOUT", is_login: true})
+    window.location.href="/"
+  }
+
   //RENDER INITIAL CHARTS
   useEffect(()=> {
-    renderCharts()
+    checkJWT()
   }, [])
 
   return (
-    <div className={styles["container"]}>
+    <div className={styles["container"]} id="expose">
       <Head>
         <title>Journeymxn</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header className={styles["bar"]}>
-        <img src="/icon-256.png" alt="journeymxn-logo" className={styles["icon-logo"]}/>
-        <h1>Dashboard</h1>
-        <a href="" className={styles["signout"]}>
-          Sign out
+      <header className={styles["bar"]} >
+        <a href="/" className={styles["icon-logo"]}>
+          <img src="/icon-256.png" alt="journeymxn-logo" />
         </a>
+        <h1>Dashboard</h1>
+        <button className={styles["signout"]} onClick={logOut}>
+          Log out
+        </button>
       </header>
       <section className={styles["filters"]}>
         <h1>Filter By: </h1>
