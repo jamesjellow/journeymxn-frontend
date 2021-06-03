@@ -55,6 +55,14 @@ export default function Navigation() {
                         <span>about</span>
                     </a>
                 </li>
+                <li className={styles["nav__item"]} onClick={handlePageChange('/admin')}>
+                    <svg className={styles["nav__icon"]}>
+                        <use xlinkHref={getIconUrl('/admin')} />
+                    </svg>
+                    <a href="#!" className={styles["nav__link"]}>
+                        <span>admin</span>
+                    </a>
+                </li>
             </ul>
         </nav>
     );

@@ -1,21 +1,23 @@
 import Head from 'next/head'
-import dynamic from 'next/dynamic'
-import Link from 'next/link'
-import axios from "axios"
-
-import {useEffect} from 'react'
-import {useState} from '../components/context'
+import {useState,useDispatchState} from '../components/context'
 
 import styles from '../styles/pages/login.module.scss'
 
 export default function Login() {
 
   const state = useState();
+  const dispatch = useDispatchState();
 
   const submit = async (e) => {
-
-    e.preventDefault()
     
+    e.preventDefault()
+
+    document.getElementById("incorrect").innerHTML = ""
+
+    //SWAP LOADING ANIMATIONS
+    document.getElementById("logo").style.display = "none"
+    document.getElementById("loading").style.display = "flex"
+
     let email = document.querySelector("#email").value
     let password = document.querySelector("#pass").value
 
@@ -25,7 +27,7 @@ export default function Login() {
     }
 
     const url = 'https://journeymxn-api.herokuapp.com/login';
-    
+
     try {
         const res = await fetch(url, {
           method: "post",
@@ -35,14 +37,25 @@ export default function Login() {
           body: JSON.stringify(submisison)
         })
 
-        console.log(res)
+        const body = await res.json()
 
         if(res.status == 200) {
-          window.location.href = "/admin"
+          localStorage.setItem('token', body.token)
+          dispatch({type: "LOGIN"})
+
+          window.location.href = "/admin"         
         }
+        else if (res.status == 401) {
+          document.getElementById("incorrect").innerHTML = "*The login credentials you have entered are invalid."
+        } 
+        
     } catch (e) {
       console.log(e)
     }
+
+    //RETURN TO ORIGINAL LOGO
+    document.getElementById("logo").style.display = "flex"
+    document.getElementById("loading").style.display = "none"
   } 
 
   return (
@@ -53,11 +66,18 @@ export default function Login() {
         <title>Journeymxn</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-        <div className={styles["logo"]}>
+
+        <h1 id="incorrect" className={styles["incorrect"]}></h1> 
+
+        <div className={styles["logo"]} id="logo">
             <img src="/icon-256.png" alt="journeymxn-logo" className={styles["icon-logo"]}/>
             <h1>journeymxn</h1>
         </div>
-        <form action="POST" className={styles["card"]} onSubmit={submit}>
+        <div className={styles["loading"]} style={{display: "none"}}  id="loading">
+          <img src="/icon-256.png" alt="journeymxn-logo" className={styles["rotation"]}/>
+          <h1>loading...</h1>
+        </div>
+        <form className={styles["card"]} onSubmit={submit}>
             <h1 className={styles["title"]}>Login</h1>
 
             <div className={styles["input_pair"]}>
@@ -69,10 +89,10 @@ export default function Login() {
             <div className={styles["input_pair"]}>
               <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
                 <g fill="none"><path d="M0 0h24v24H0V0z"/><path d="M0 0h24v24H0V0z" opacity=".87"/></g><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg>
-              <input id="pass" type="password" placeholder="Enter Password" name="pass" required className={styles["passInput"]}/>
+              <input id="pass" type="password" placeholder="Enter Password" name="pass" required className={styles["passInput"]} />
             </div>
 
-            <button type="submit" className={styles["submit"]} >Login</button>
+            <button type="submit" className={styles["submit"]} onClick={submit}>Login</button>
         </form>
     </div>
   )
