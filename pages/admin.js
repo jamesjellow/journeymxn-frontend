@@ -11,13 +11,18 @@ export default function Admin() {
   const state = useState()
   const dispatch = useDispatchState();
 
-  if(state.is_login) {
+  if(!state.is_login)
+  {
+    const changePage = useEffect(() => { window.location.href = '/login'; });
+    changePage
     return (
-     <div className={styles["redirect"]}>
-      <img src="/icon-256.png" alt="journeymxn-logo" className={styles["icon-logo"]}/>
-      <h1>Please login to view this page!</h1>
-      <h1>Redirecting to Login</h1>
-     </div> 
+      <div className={styles["redirect"]}>
+          <div className={styles["logo"]}>
+              <img src="/icon-256.png" alt="journeymxn-logo" className={styles["icon-logo"]}/>
+              <h1>journeymxn</h1>
+              <h1>Redirecting...</h1>
+          </div>
+      </div>
     )
   }
 
