@@ -11,6 +11,16 @@ export default function Admin() {
   const state = useState()
   const dispatch = useDispatchState();
 
+  if(state.is_login) {
+    return (
+     <div className={styles["redirect"]}>
+      <img src="/icon-256.png" alt="journeymxn-logo" className={styles["icon-logo"]}/>
+      <h1>Please login to view this page!</h1>
+      <h1>Redirecting to Login</h1>
+     </div> 
+    )
+  }
+
   //SET UP LINK TO ACCESS CHARTS
   const sdk = new EmbedSDK({
     baseUrl: 'https://charts.mongodb.com/charts-data-analytics-platform-gqxba'
