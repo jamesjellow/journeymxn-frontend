@@ -90,6 +90,10 @@
     grid-template-columns: 7fr 5fr;
     gap: 8rem;
 
+    @include respond(tab-port) {
+        grid-template-columns: 1fr;
+    }
+
     margin-bottom: 10rem;
 
     &__img-comp {
