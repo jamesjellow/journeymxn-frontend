@@ -11,7 +11,7 @@ export default function Admin() {
   const state = useState()
   const dispatch = useDispatchState();
 
-  if(!state.is_login)
+  if(state.is_login)
   {
     const changePage = useEffect(() => { window.location.href = '/login'; });
     changePage
